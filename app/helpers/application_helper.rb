@@ -2,7 +2,7 @@ require 'navigation_helper.rb'
 
 module ApplicationHelper
 include NavigationHelper
-  
+
   def full_title(page_title = '')
     base_title = "Take Off Eh!"
     if page_title.empty?
@@ -29,6 +29,11 @@ include NavigationHelper
     else
         "../assets/medium-default-avatar.png"
     end
+  end
+
+  # readable time
+  def readable_time(time)
+    time.strftime("%b %d, %I:%M%P")
   end
 
   def author_of(resource)

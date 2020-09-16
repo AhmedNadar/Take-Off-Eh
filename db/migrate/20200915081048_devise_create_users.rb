@@ -34,8 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
 
       t.string :first_name, limit: 255
       t.string :last_name, limit: 255
-      t.string :full_name, limit: 255
-
+      
       t.timestamps null: false
     end
 
