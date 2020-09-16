@@ -2,7 +2,7 @@
 
 ### friendly_id [https://github.com/norman/friendly_id]
 
-  - gem 'friendly_id', '~> 5.4.0'
+  - `gem 'friendly_id', '~> 5.4.0'`
   - bundle install
   - rails g migration AddSlugToUsers slug:uniq (Users or other model)
   - rails generate friendly_id
@@ -73,4 +73,36 @@
   - `rails g annotate:install`
   - cd /path/to/app
       `annotate`, `annotate --models --exclude fixtures`, `annotate --models`, `annotate --routes`, `annotate --delete`, `annotate --routes --delete`
-  - Update `lib/tasks/auto_annotate_models.rake` file
+  - Update `lib/tasks/auto_annotate_models.rake` file.
+
+### responders [https://github.com/heartcombo/responders]
+  - `gem 'friendly_id', '~> 5.4.0'`
+  - `bundle install`
+  - `rails g responders:install`
+
+### inline_svg [https://github.com/jamesmartin/inline_svg]
+
+  - `gem 'inline_svg'`
+  - `bundle`
+
+  #### Usage
+    - Sprockets
+        `inline_svg_tag(file_name, options={})`
+    - Webpacker
+        `inline_svg_pack_tag(file_name, options={})`
+
+
+### rubocop [https://github.com/rubocop-hq/rubocop]
+
+  - `gem 'rubocop', require: false`
+  
+  #### Quickstart
+    Just type rubocop in a Ruby project's folder and watch the magic happen.
+      `$ cd my/cool/ruby/project`
+      `$ rubocop`
+
+
+
+### rubocop [https://github.com/rubocop-hq/rubocop]
+
+- `gem 'rubocop', require: false`
