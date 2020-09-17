@@ -7,8 +7,14 @@ Rails.application.routes.draw do
   end
   
   root to: 'home#index'
+  resources :users
   
-  devise_for :users
+  devise_for  :users, path: 'profile', 
+                    path_names:  { 
+                      sign_out: 'signout', 
+                      edit: 'settings' 
+                    }
+                    
   devise_scope :user do
     get 'signup', to: 'devise/registrations#new'
   end

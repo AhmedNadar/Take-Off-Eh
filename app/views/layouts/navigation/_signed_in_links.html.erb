@@ -1,5 +1,13 @@
-<p class="block mt-4 mb-2 text-white lead lg:inline-block lg:mt-0 lg:mr-4 lg:mb-0">Welcome <%= current_user.name %></p>
+<p class="block mt-4 mb-2 lead lg:inline-block lg:mt-0 lg:mr-4 lg:mb-0">
+  Welcome, 
+    <%=link_to edit_user_registration_path do %>
+      <strong><%= (current_user.name || current_user.email) %> ! </strong>      
+  <% end %>
+</p>
 <%= image_tag gravatar_for(current_user) , alt: current_user.name, title: current_user.name, class: "h-8 w-8 rounded-full mx" %>&nbsp;&nbsp;
+<% if :admin? %>
+  <%= link_to 'Community', users_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>  
+<% end %>
 <%#= link_to "Dashboard", dashboard_index_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>
 <%#= link_to "Jobs", jobs_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>        
 <%= link_to "Account", edit_user_registration_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>

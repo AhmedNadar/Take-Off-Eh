@@ -10,8 +10,9 @@ class Ability
       can :manage, :all
 
     elsif user.client?
+      can :read, :all
       # can :read, Company
-      # can :manage, Company, user_id: user.id
+      can :manage, User, user_id: user.id
     else
       can :read, :all
     end

@@ -21,15 +21,16 @@
 #  index_users_on_slug                  (slug) UNIQUE
 #
 class User < ApplicationRecord
+  include Sluggable
   rolify
   has_paper_trail
 
-  extend FriendlyId
-  friendly_id :name, use: :slugged
+  # extend FriendlyId
+  # friendly_id :name, use: :slugged
 
   before_save :downcase_email
   before_save :format_name
-  after_create :assign_default_role
+  # after_create :assign_default_role
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -40,35 +41,41 @@ class User < ApplicationRecord
   has_one_attached  :picture
   
   # validation
-  validates :name, presence: true, length: {maximum: 20}
+  validates :first_name,  presence: true, length: { maximum: 20 }
+  validates :last_name,   presence: true, length: { maximum: 20 }
+  validates :name,        presence: true, length: { maximum: 20 }  
+  validates :email,       presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }  
   validates_format_of :email,:with => Devise::email_regexp
-  validates :email, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }  
 
-  def downcase_email
-    self.email = email.downcase
-  end  
-
-  def assign_default_role
-    self.add_role(:client) if self.roles.blank?
-  end
-
-  def format_name
-    if name
-      name_array = []
-      name.split.each do |name_part|
-        name_array << name_part.capitalize
-      end
-
-      self.name = name_array.join(" ")
+    def admin?
+      has_role?(:admin)
     end
-  end
 
-  def admin?
-    has_role?(:admin)
-  end
+    def client?
+      has_role?(:client)
+    end
 
-  def client?
-		has_role?(:client)
-  end
+  private     
+    # def should_generate_new_friendly_id?
+    #   name_changed? && name.present?    
+    # end
 
+    def downcase_email
+      self.email = email.downcase
+    end  
+
+    def assign_default_role
+      self.add_role(:client) if self.roles.blank?
+    end
+
+    def format_name
+      if name
+        name_array = []
+        name.split.each do |name_part|
+          name_array << name_part.capitalize
+        end
+
+        self.name = name_array.join(" ")
+      end
+    end
 end

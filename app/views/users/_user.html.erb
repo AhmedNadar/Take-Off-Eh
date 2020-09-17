@@ -1,0 +1,26 @@
+<tr>
+  <td class="px-4 py-2 border"><%= link_to user.email, user %></td>
+  <%= form_with(model: user, local: true) do |f| %>  
+    <td class="px-4 py-2 py-3 pr-8 text-gray-700 border rounded">
+      <%#= f.select(:role, user.roles.keys.map {|role| [role.titleize,role]}, prompt: "Select a Company", required: true, class: " bg-gray-600 text-gray-700 py-3 px-4 pr-8 rounded") %>
+      <%= user.name %>
+    </td>
+    <td class="px-4 py-2 border">
+      <%= user.slug %>
+    </td>
+    
+    <td class="px-4 py-2 border">
+      <%= readable_time(user.created_at) %>
+    </td>
+
+    <td class="px-4 py-2 border">
+      <% if user.admin? || user.client? %>
+        <%= link_to("Delete user", user_path(user), :data => 
+          { :confirm => "You are about to delete '#{user.name}'... Are you sure?" }, 
+            :method => :delete, 
+            :class => 'button-xs bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded')%>
+        <% end %>  
+    </td>
+  <% end %>  
+</tr>
+
