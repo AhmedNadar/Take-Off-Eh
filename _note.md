@@ -102,7 +102,19 @@
       `$ rubocop`
 
 
+### paper_trail [https://github.com/paper-trail-gem/paper_trail]
 
-### rubocop [https://github.com/rubocop-hq/rubocop]
+  - `gem 'paper_trail'`
+  
+  #### Add a `versions` table to your database:
+    - `bundle exec rails generate paper_trail:install [--with-changes]`
 
-- `gem 'rubocop', require: false`
+
+  #### Add `has_paper_trail` to the models you want to track.
+    `class User < ActiveRecord::Base`
+      `has_paper_trail`
+    `end`
+  #### If your controllers have a `current_user` method, you can easily track who is responsible for changes by adding a controller callback.
+    `class ApplicationController`
+      `before_action :set_paper_trail_whodunnit`
+    `end`

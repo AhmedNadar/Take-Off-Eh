@@ -1,11 +1,13 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
-  self.responder = ApplicationResponder
+  protect_from_forgery with: :exception
+  
+  self.responder = ApplicationResponder  
+
   respond_to :html
 
-  protect_from_forgery with: :exception
-
+  before_action :set_paper_trail_whodunnit
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
