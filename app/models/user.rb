@@ -20,9 +20,12 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_slug                  (slug) UNIQUE
 #
-class User < ApplicationRecord
-  include Sluggable
+class User < ApplicationRecord  
   rolify
+
+  extend FriendlyId
+  friendly_id :slug_candidates, use: [:slugged, :finders]
+
   has_paper_trail
 
   # extend FriendlyId
@@ -30,7 +33,7 @@ class User < ApplicationRecord
 
   before_save :downcase_email
   before_save :format_name
-  # after_create :assign_default_role
+  after_create :assign_default_role
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -39,6 +42,7 @@ class User < ApplicationRecord
   # association
   has_person_name    
   has_one_attached  :picture
+  has_many  :companies, dependent: :destroy
   
   # validation
   validates :first_name,  presence: true, length: { maximum: 20 }
@@ -53,6 +57,18 @@ class User < ApplicationRecord
 
     def client?
       has_role?(:client)
+    end
+
+    def slug_candidates
+      [:name]
+    end
+
+    def should_generate_new_friendly_id?
+      if !slug?
+        email_changed?
+      else
+        false
+      end
     end
 
   private     

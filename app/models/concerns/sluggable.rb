@@ -14,17 +14,18 @@ module Sluggable
       case_sensitive: false,
       message: 'is already taken, leave blank to generate automatically'
     }
-    #
+
     # Define our slug candidates for FriendlyId
+    #
     # @return [array]
     #
     def slug_candidates
       [
         :suggested_url,
-        :name.full
+        :name
       ]
     end
-    #
+
     # Determine whether a new slug should be generated depending on the fields
     # that have been changed
     #

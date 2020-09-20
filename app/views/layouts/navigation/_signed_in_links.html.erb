@@ -8,6 +8,8 @@
 <% if :admin? %>
   <%= link_to 'Community', users_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>  
 <% end %>
+<%= link_to "My companies", mycompanies_path, class: "w-full text-lg btn btn-transparent lg:w-auto lg:text-sm", class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>
+<%= link_to "New Company", new_company_path, class: "w-full text-lg btn btn-transparent lg:w-auto lg:text-sm", class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>
 <%#= link_to "Dashboard", dashboard_index_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>
 <%#= link_to "Jobs", jobs_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>        
 <%= link_to "Account", edit_user_registration_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>

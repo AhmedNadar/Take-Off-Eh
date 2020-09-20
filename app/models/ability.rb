@@ -1,49 +1,60 @@
 # frozen_string_literal: true
+
 class Ability
   include CanCan::Ability
-
   def initialize(user)
-    # Define abilities for the passed in user here. For example:
+
     user ||= User.new # guest user (not logged in)
+    can :read, :all # permissions for every user, even if not logged in
 
-    if user.admin?
-      can :manage, :all
+    if user.present?  # additional permissions for logged in users (they can manage their posts)
+      if user.has_role? :admin
+        can :manage, :all
+        # - user authorize -
+        can [:delete, :show, :edit, :update, :create, :index, :destroy_multiple], User
+        can :destroy, User do |u| !u.eql?(user) end  
 
-    elsif user.client?
-      can :read, :all
-      # can :read, Company
-      can :manage, User, user_id: user.id
-    else
-      can :read, :all
+      else user.has_role? :client
+        # user authorize
+        can :manage, Company, user_id: user.id 
+      end
     end
   end
-end  
+end
 
 
 
-    # Define abilities for the passed in user here. For example:
-    #
-    #   user ||= User.new # guest user (not logged in)
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
-    #
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+
+# # frozen_string_literal: true
+# class Ability
+#   include CanCan::Ability
+
+#   def initialize(user)
+#     user ||= User.new # guest user (not logged in)
+#     can :read, :all # permissions for every user, even if not logged in
+
+#     if user.has_role? :admin
+#       can :manage, :all
+#       # - user authorize -
+#       can [:delete, :show, :edit, :update, :create, :index, :destroy_multiple], User
+#       can :destroy, User do |u| !u.eql?(user) end
+
+#     else user.has_role? :client
+#       # - user authorize -
+#       can :read, Company
+#       can :update, Company, user_id: user.id # additional permissions for logged in users (they can manage their posts)
+#       can :destroy, Company, user_id: user.id # additional permissions for logged in users (they can manage their posts)
+#       can :create, Company, user_id: user.id # additional permissions for logged in users (they can manage their posts)
+#       can :edit, User, user_id: user.id # logged in users can also update it's account      
+#     end
+
+#     # if user.has_role? :client
+#     #   can :manage, Company, user_id: user.id # additional permissions for logged in users (they can manage their posts)
+#     #   can :read, Company, user_id: user.id # logged in users can also create company
+#     #   can :update, User, user_id: user.id # logged in users can also update it's account
+#     # end
+#     # if user.has_role? :admin
+#     #   can :manage, :all # finally we give all remaining permissions only to the admins
+#     # end
+#   end
+# end

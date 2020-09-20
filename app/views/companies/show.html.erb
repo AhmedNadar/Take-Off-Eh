@@ -1,0 +1,60 @@
+<div class="container relative p-6 mx-auto text-gray-900 bg-white rounded-lg lg:p-10" id=<%= company_path(@company.id) %>>
+  <div class="flex flex-wrap items-center justify-between w-full pb-4 mb-8">
+      <div class="flex-1">
+        <h1 class="text-3xl font-bold leading-none text-gray-800"><%= @company.name %></h1>
+        <p class="text-sm italic text-gray-500">Created by <%= @company.user.name ||=
+      @company.user.username %></p>
+      </div>
+
+
+      <div class="flex flex-wrap items-start justify-between w-full mb-6">
+        <div class="w-full lg:w-3/5">
+          <% if @company.company_logo.present? %>
+            <%= image_tag @company.company_logo, class: "rounded" %>
+          <% else %>
+            <div class="flex items-center justify-center p-8 text-center bg-gray-100 rounded">
+              <div class="">
+                <p class="text-xs font-bold text-gray-600 uppercase">COMPANY</p>
+                <h3 class="text-2xl text-black"><%= @company.name %></h3>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="w-full mt-6 lg:pl-10 lg:w-2/5 lg:mt-0">
+          <div class="mb-6">
+            <p class="text-sm font-semibold text-gray-500 uppercase">Details</p>
+            <%= @company.details %>
+          </div>        
+
+          <div class="mb-6">
+            <p class="text-sm font-semibold text-gray-500 uppercase">Email</p>
+            <%= @company.email %>
+          </div>        
+
+          <div class="mb-6">
+            <p class="text-sm font-semibold text-gray-500 uppercase">Webiste</p>
+            <%= @company.website %>
+          </div>        
+          <div class="mb-6">
+            <p class="text-sm font-semibold text-gray-500 uppercase">Founded Date</p>
+            <%= @company.found_date %>
+          </div>          
+
+        </div>     
+
+      </div>
+
+  
+  </div> 
+
+ 
+    <div class="absolute top-0 right-0 mt-4 mr-4">
+      <% if can? :manage, @company %>
+        <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-sm btn-outlined btn-default" %>
+      <% end %>
+      <% if can? :manage, @company %>      
+        <%= link_to 'Delete', company_path(@company), method: :delete, class: "btn btn-sm btn-outlined btn-default", data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </div>
+</div>   
