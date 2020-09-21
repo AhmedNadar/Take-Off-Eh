@@ -60,7 +60,7 @@ class User < ApplicationRecord
     end
 
     def slug_candidates
-      [:name]
+      [:name, [:name, :full_name]]
     end
 
     def should_generate_new_friendly_id?

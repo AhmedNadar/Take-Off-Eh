@@ -44,7 +44,7 @@ class Company < ApplicationRecord
 
 
   def slug_candidates
-    [:name]
+    [:name, [:name, :found_date]]
   end
 
   def should_generate_new_friendly_id?

@@ -1,0 +1,5 @@
+<%= render "shared/flash_notice" %>
+
+<h1>My Dashboard</h1>
+
+<%= render partial: 'companies/companies_list', :locals => {companies: @companies} %>

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.friendly.find(params[:id])
+    @user = User.find(params[:id])
 
     unless current_user.admin?
       unless @user == current_user
