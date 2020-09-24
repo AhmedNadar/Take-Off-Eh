@@ -52,6 +52,8 @@ class Company < ApplicationRecord
 
   # Note that implicit association has a plural form in this case
   scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
+  # Thing.joins(:image_attachment).where.not(active_storage_attachments: { record_id: nil })
+
 
 
   def slug_candidates

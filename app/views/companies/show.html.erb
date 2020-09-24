@@ -51,7 +51,7 @@
           <div class="grid grid-cols-4 gap-2">
             <% (0...@company.company_images.count).each do |image| %>
               <%#= image_tag(@company.company_images[image], class: "rounded-lg md:w-90") %>
-              <%= image_tag(@company.thumbnail(image), class: "rounded-lg") %>
+              <%= image_tag(@company.thumbnail(image), class: "rounded-lg") %>            
 
               <%#= image_tag(@company.company_images[image]) %>
             <% end %>
