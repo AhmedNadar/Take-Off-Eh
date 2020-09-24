@@ -32,6 +32,9 @@ class Company < ApplicationRecord
   belongs_to :user, dependent: :destroy
   has_rich_text :details
   has_one_attached :company_logo
+  has_many_attached :company_images
+
+
 
     # validatation
   validates :name,          presence: true
@@ -40,7 +43,15 @@ class Company < ApplicationRecord
   validates :email,         presence: true
   validates :website,       presence: true
   validates :found_date,    presence: true
-  validates :company_logo,  presence: true
+  # validates :company_logo,  presence: true
+  # validates :company_images,  presence: true
+  validate :company_logo_format
+  validate :image_type
+  
+
+
+  # Note that implicit association has a plural form in this case
+  scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
 
 
   def slug_candidates
@@ -55,4 +66,39 @@ class Company < ApplicationRecord
     end
   end
 
+  # Defind company's gallery images size
+  def thumbnail input
+    return self.company_images[input].variant(resize: '100x100%').processed
+  end
+  # Defind company logo size
+  def logo_resize
+    return self.company_logo.variant(resize: '100x100%').processed
+  end
+
+  private
+
+    def company_logo_format
+      return unless company_logo.attached?
+      return if company_logo.blob.content_type.start_with? 'image/'
+      company_logo.purge_later
+      errors.add(:company_logo, 'needs to be an image')
+    end
+  
+    def image_type
+      if company_images.attached? == false
+        errors.add(:company_images, "are missing!")
+      end
+      company_images.each do |image| 
+        if !image.content_type.in?(%('image/jpeg image/png'))
+           errors.add(:company_images, "should only be a JPEG and PNG format.")
+        end
+      end
+    end
+
+  
 end
+
+
+
+
+

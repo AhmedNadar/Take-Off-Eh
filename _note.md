@@ -118,3 +118,18 @@
     `class ApplicationController`
       `before_action :set_paper_trail_whodunnit`
     `end`
+
+
+============
+
+## Articles and sites for examples and code
+
+  - [Rails 5.2 and Active Storage - the new approach to file uploads](https://prograils.com/posts/rails-5-2-active-storage-new-approach-to-file-uploads)
+  - [Youtube for examples and features](https://www.youtube.com/c/Deanin/videos)
+  - [Tailwind for CSS](https://tailwindcss.com/)
+  - [Examples and gems list](https://briansigafoos.com/rails-gists/)
+  - [Rails, Devise, CanCan, Rolify and User Company Role](https://coderwall.com/p/eudimq/rails-devise-cancan-rolify-and-user-company-role)
+  - [Markdown syntax](https://www.markdownguide.org/basic-syntax)
+  - [Rails 5.2: Active Storage and beyond](https://evilmartians.com/chronicles/rails-5-2-active-storage-and-beyond)
+  - [Eager Loading/Querying Against ActiveStorage Attachments](https://jasoncharnes.com/eager-loading-querying-against-activestorage-attachments/)
+  - 

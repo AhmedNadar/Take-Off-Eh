@@ -1,22 +1,19 @@
 <template>
-  <div id="app">
-    <p>{{ message }}</p>
+  <div id="app" class="antialiased text-gray-900">
+    <div class="min-h-screen px-6 py-32 bg-gray-800">
+      <AccountDropdown />
+    </div>
   </div>
 </template>
 
 <script>
+import AccountDropdown from './components/AccountDropdown'
 export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
-    }
+  name: 'app',
+  components: {
+    AccountDropdown
   }
 }
 </script>
 
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>
+<style src="./assets/tailwind.css"></style>

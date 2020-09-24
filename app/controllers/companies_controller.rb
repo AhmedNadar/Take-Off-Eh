@@ -7,7 +7,8 @@ class CompaniesController < ApplicationController
   respond_to :html
 
   def index
-    @companies = Company.all
+    # @companies = Company.with_attached_company_images
+    @companies = Company.with_attached_image.all
     respond_with(@companies)
   end
 
@@ -51,6 +52,6 @@ class CompaniesController < ApplicationController
     end
 
     def company_params
-      params.require(:company).permit(:name, :details, :email, :website, :found_date, :company_logo)
+      params.require(:company).permit(:name, :details, :email, :website, :found_date, :company_logo, company_images:[])
     end
 end

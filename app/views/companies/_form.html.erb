@@ -16,6 +16,14 @@
     <%= form.file_field :company_logo %>
   </div>
 
+
+  <div class="mb-6">
+    <%= form.label :company_images, "Comapny Images", class: "label" %>
+    <%= form.file_field :company_images, multiple: true, direct_upload: true, class: 'form-input py-10', accept: 'image/png, image/jpeg, image/gif, image/tiff', size_limit: 5_000_000 %>
+
+  </div>
+
+
   <div class="mb-6">
     <%= form.label :name, "Company Name", class: "label" %>
     <%= form.text_field :name, class: "input", required: 'required', placeholder: "Company Name" %>

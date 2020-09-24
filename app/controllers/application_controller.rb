@@ -28,6 +28,5 @@ class ApplicationController < ActionController::Base
     def after_sign_out_path_for(resource)
       flash[:notice] = "Goodbye for now, and come back again! 😀"
       root_path
-    end
-      
+    end      
 end
