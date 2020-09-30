@@ -5,7 +5,7 @@
   <%= form.hidden_field :_destroy %>
 
   <p><%= form.text_field :title, placeholder: "Memebr title" %></p>
-  <p><%= form.text_field :first_name, :value => @company.user.first_name, placeholder: "First name" %></p>
+  <p><%= form.text_field :first_name, :value => current_user.first_name, placeholder: "First name" %></p>
   <p><%= form.text_field :last_name, placeholder: "Last Name" %></p>
   <p><%= form.text_field :profile_link, placeholder: "Profile Link" %></p>
   <p><%= form.text_field :email, placeholder: "Email" %></p>
