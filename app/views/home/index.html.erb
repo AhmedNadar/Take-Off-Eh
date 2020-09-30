@@ -33,9 +33,9 @@
         <div class="grid justify-center grid-cols-1 gap-6 lg:grid-cols-6">
           <% @companies.each do |company| %>
             <article class="lg:col-span-2">
-              <a href="/blog/lifestyle/reducing-meetings-reduces-stress/" class="">
+            
                 <%= image_tag company.company_logo.variant(resize_to_limit: [600, 400]), class:"h-auto max-w-full rounded-t", alt:"company.name" if company.company_logo.present? %>
-              </a>
+            
 
               <div class="p-6 overflow-hidden bg-white rounded-b shadow-sm">
                 <header>

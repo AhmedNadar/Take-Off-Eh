@@ -53,6 +53,8 @@ group :development do
   gem 'pry', '~> 0.12.2'
   # Use Pry as your rails console (https://github.com/rweng/pry-rails)
   gem 'pry-rails'
+  # Annotates Rails Models, routes, fixtures, and others based on the database schema. (http://github.com/ctran/annotate_models)
+  gem 'annotate', '~> 3.1.1'
 end
 
 group :test do
@@ -72,8 +74,6 @@ gem 'friendly_id', '~> 5.3'
 gem 'name_of_person', '~> 1.1', '>= 1.1.1'
 gem 'cancancan', '~> 3.1.0'
 gem 'rolify', '~> 5.3.0'
-# Annotates Rails Models, routes, fixtures, and others based on the database schema. (http://github.com/ctran/annotate_models)
-gem 'annotate', '~> 3.1.1'
 gem 'responders', '~> 3.0.1'
 gem 'foreman'
 gem "inline_svg", "~> 1.7"
@@ -83,10 +83,12 @@ gem "simple_discussion", "~> 1.2"
 gem "stripe_event", "~> 2.3"
 # Ruby bindings for the Stripe API (https://stripe.com/docs/api/ruby)
 gem 'stripe', '~> 5.25.0'
-gem 'whenever', '~> 1.0'
+gem 'whenever', '~> 1.0', require: false
 gem 'rubocop', '~> 0.91.0', require: false
 gem 'paper_trail'
 gem 'mini_magick', '~> 4.10.1'
+gem 'sitemap_generator', '~> 6.1.2'
+
 # Use Hirb for better database table display in console
 gem 'hirb', '0.7.3'
 # Simple, efficient background processing for Ruby (http://sidekiq.org)

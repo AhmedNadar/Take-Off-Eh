@@ -119,8 +119,23 @@
       `before_action :set_paper_trail_whodunnit`
     `end`
 
+### SitemapGenerator [https://github.com/kjvarga/sitemap_generator#rails]
+  - `gem 'sitemap_generator'`
 
-============
+  #### Rake Tasks
+  - `rake sitemap:install` will create a `config/sitemap.rb` file which is your sitemap configuration and contains everything needed to build your sitemap.
+
+
+
+
+
+
+
+
+
+
+========================
+
 
 ## Articles and sites for examples and code
 

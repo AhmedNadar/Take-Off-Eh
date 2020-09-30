@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_17_103434) do
+ActiveRecord::Schema.define(version: 2020_09_27_181024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,11 +50,17 @@ ActiveRecord::Schema.define(version: 2020_09_17_103434) do
     t.string "name"
     t.string "email"
     t.string "website"
-    t.date "found_date"
+    t.string "found_date"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.string "headquarter"
+    t.integer "company_size"
+    t.string "phone_number"
+    t.string "business_model"
+    t.string "stage"
+    t.string "industry"
     t.index ["slug"], name: "index_companies_on_slug", unique: true
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
@@ -78,6 +84,18 @@ ActiveRecord::Schema.define(version: 2020_09_17_103434) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "team_members", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.string "title"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "profile_link"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_team_members_on_company_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -116,4 +134,5 @@ ActiveRecord::Schema.define(version: 2020_09_17_103434) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "companies", "users"
+  add_foreign_key "team_members", "companies"
 end

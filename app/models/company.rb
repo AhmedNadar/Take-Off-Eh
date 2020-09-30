@@ -33,8 +33,9 @@ class Company < ApplicationRecord
   has_rich_text :details
   has_one_attached :company_logo
   has_many_attached :company_images
+  has_many :team_members, dependent: :destroy, inverse_of: :company
 
-
+  accepts_nested_attributes_for :team_members, allow_destroy: true, reject_if: proc { |attr| attr['title'].blank?}
 
     # validatation
   validates :name,          presence: true
@@ -42,22 +43,19 @@ class Company < ApplicationRecord
   validates :details,       presence: true
   validates :email,         presence: true
   validates :website,       presence: true
-  validates :found_date,    presence: true
+  # validates :found_date,    presence: true
   # validates :company_logo,  presence: true
   # validates :company_images,  presence: true
   validate :company_logo_format
   validate :image_type
+  validates_associated :team_members
   
-
-
   # Note that implicit association has a plural form in this case
   scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
-  # Thing.joins(:image_attachment).where.not(active_storage_attachments: { record_id: nil })
-
 
 
   def slug_candidates
-    [:name, [:name, :found_date]]
+    [:name, [:name]]
   end
 
   def should_generate_new_friendly_id?
@@ -97,10 +95,4 @@ class Company < ApplicationRecord
       end
     end
 
-  
 end
-
-
-
-
-

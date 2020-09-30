@@ -14,19 +14,17 @@
             <%= @company.details %>
           </div>        
 
-          <div class="mb-6">
-            <p class="text-sm font-semibold text-gray-500 uppercase">Email</p>
-            <%= @company.email %>
-          </div>        
 
-          <div class="mb-6">
-            <p class="text-sm font-semibold text-gray-500 uppercase">Webiste</p>
-            <%= @company.website %>
-          </div>        
-          <div class="mb-6">
-            <p class="text-sm font-semibold text-gray-500 uppercase">Founded Date</p>
-            <%= @company.found_date %>
+        <div class="w-full lg:w-full">
+          <div class="grid grid-cols-2 gap-2">
+            <% (0...@company.company_images.count).each do |image| %>
+              <%#= image_tag(@company.company_images[image], class: "rounded-lg md:w-90") %>
+              <%= image_tag(@company.thumbnail(image), class: "rounded-lg") %>            
+              <%#= image_tag(@company.company_images[image]) %>
+            <% end %>
           </div>          
+        </div>
+
 
         </div>   
 
@@ -45,18 +43,81 @@
 
           <h3 class="text-lg font-bold text-gray-800"><%= @company.name %></h3>
           <p class="text-sm italic text-gray-500">Created by <%= @company.user.name ||= @company.user.username %></p>
-        </div>  
 
-        <div class="w-full lg:w-full">
-          <div class="grid grid-cols-4 gap-2">
-            <% (0...@company.company_images.count).each do |image| %>
-              <%#= image_tag(@company.company_images[image], class: "rounded-lg md:w-90") %>
-              <%= image_tag(@company.thumbnail(image), class: "rounded-lg") %>            
+          <div class="items-start justify-start w-full mx-auto mt-6">
+            <div class="mb-6">
+              <p class="text-sm font-semibold text-gray-500 uppercase">Email</p>
+              <%=mail_to @company.email, @company.email, subject: "Hi from Built In Toronto"%>
+            </div>        
 
-              <%#= image_tag(@company.company_images[image]) %>
+            <div class="mb-6">
+              <p class="text-sm font-semibold text-gray-500 uppercase">Webiste</p>
+              <p><%=link_to "http://" + @company.website, "http://#{@company.website}", target: '_blank' %></p>
+            </div>
+                      
+            <% if @company.found_date.present? %>        
+              <div class="mb-6 ">
+                <p class="text-sm font-semibold text-gray-500 uppercase">Founded Date</p>
+                <%= @company.found_date %>
+              </div>
             <% end %>
-          </div>          
-        </div>
+            <% if @company.headquarter.present? %>
+              <div class="mb-6 ">
+                <p class="text-sm font-semibold text-gray-500 uppercase">Headquarter</p>
+                <%= @company.headquarter %>
+              </div>
+            <% end %>
+            <% if @company.company_size.present? %>
+              <div class="mb-6 ">
+                <p class="text-sm font-semibold text-gray-500 uppercase">Company Size</p>
+                <%= @company.company_size %>
+              </div>  
+            <% end %>                 
+            <% if @company.phone_number.present? %>
+              <div class="mb-6 ">
+                <p class="text-sm font-semibold text-gray-500 uppercase">Phone Number</p>
+                <%= @company.phone_number %>
+              </div>
+            <% end %>
+            <% if @company.business_model.present? %>
+              <div class="mb-6 ">
+                <p class="text-sm font-semibold text-gray-500 uppercase">Business Model</p>
+                <%= @company.business_model %>
+              </div>    
+            <% end %>
+            <% if @company.stage.present? %>
+              <div class="mb-6 ">
+                <p class="text-sm font-semibold text-gray-500 uppercase">Stage</p>
+                <%= @company.stage %>
+              </div>          
+            <% end %>
+            <% if @company.industry.present? %>
+              <div class="mb-6 ">
+                <p class="text-sm font-semibold text-gray-500 uppercase">Industry</p>
+                <%= @company.industry %>
+              </div>          
+            <% end %>
+          </div>              
+        </div>  
+        
+
+        <% @company.team_members.each do |member| %>
+          <div class="col-md-3 col-sm-3">
+              <div class="thumbnail">
+                <%= image_tag member.member_photo.variant(resize: '100x100!').processed, class: "rounded-full h-56 w-56 mx-auto", alt: member.title %>
+                
+                <div class="caption">
+                  <h6 class="name"><%= member.title.capitalize %></h6>
+                  <h6 class="name"><%= member.first_name.capitalize %></h6>
+                  <h6 class="name"><%= member.last_name.capitalize %></h6>
+                  <h6 class="name"><%= member.profile_link.capitalize %></h6>
+                  <h6 class="name"><%= member.email.capitalize %></h6>
+                </div>
+              </div>
+            </div>
+        <% end %>
+
+
       </div>
   </div> 
 

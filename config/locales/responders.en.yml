@@ -14,6 +14,6 @@ en:
       create:
         notice: 'Your Company was created and will be published soon'
       update:
-        notice: 'Your company was uopdated'
+        notice_html: 'Your company was successfully updated ✅ 👏🏼'
       destroy:
         notice: 'Your Copmany was deleted!'

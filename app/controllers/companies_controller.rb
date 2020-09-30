@@ -14,27 +14,31 @@ class CompaniesController < ApplicationController
 
   def show
     respond_with(@company)
+    # @team_members = @company.team_members.all
   end
 
   def new
     @company = Company.new
+    # @company.team_members.new
     respond_with(@company)
   end
 
   def edit
+  
   end
 
   def create
     @company = Company.new(company_params)
-    # @company.user = current_user
-    @company.user_id = current_user.id
+    @company.user = current_user
+    # @company.team_members.first.user_id = current_user.id
+    # @company.user_id = current_user.id
     @company.save
     respond_with(@company)
   end
 
   def update
     @company.update(company_params)
-    respond_with(@company, notice: "'#{@company.name}' company was successfully created ✅ 👏🏼")
+    respond_with(@company)
   end
 
   def destroy
@@ -48,10 +52,14 @@ class CompaniesController < ApplicationController
 
   private
     def set_company
-      @company = Company.find(params[:id])
+      @company = Company.friendly.find(params[:id])
     end
 
     def company_params
-      params.require(:company).permit(:name, :details, :email, :website, :found_date, :company_logo, company_images:[])
+      params.require(:company).permit(
+        :name, :details, :email, :website, :found_date, :slug, :business_model,
+        :headquarter, :company_size, :company_logo, :phone_number, :stage, :industry,
+        company_images:[],
+        team_members_attributes: [:_destroy, :id, :title, :first_name, :last_name, :email, :profile_link, :member_photo])
     end
 end

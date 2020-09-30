@@ -23,7 +23,6 @@
 
   </div>
 
-
   <div class="mb-6">
     <%= form.label :name, "Company Name", class: "label" %>
     <%= form.text_field :name, class: "input", required: 'required', placeholder: "Company Name" %>
@@ -45,10 +44,71 @@
   </div>
 
   <div class="mb-6">
-    <%= form.label :found_date, "Founded Date", class: "label" %>
-    <%= form.date_select :found_date, class: "input", required: 'required', placeholder: "When your company was founded" %>
+    <%= form.label :headquarter, "Company's headquarter ", class: "label" %>
+    <%= form.text_field :headquarter, class: "input", placeholder: "Example: Toronto, Canada" %>
   </div>
 
+  <div class="mb-6">
+    <%= form.label :company_size, "Company's team size ", class: "label" %>
+    <%= form.text_field :company_size, class: "input", placeholder: "Example: 10 -20" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :phone_number, "Company's phone_number ", class: "label" %>
+    <%= form.text_field :phone_number, class: "input", placeholder: "Example: 00-01-647-2345" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :business_model, "Company's business_model ", class: "label" %>
+    <%= form.text_field :business_model, class: "input", placeholder: "Choose one of: B2C, B2B, Marketplace or B2G" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :stage, "Company's stage ", class: "label" %>
+    <%= form.text_field :stage, class: "input", placeholder: "Example:Idea, Product or prototype, Go to Market, Growth and expancion" %>
+  </div>  
+
+  <div class="mb-6">
+    <%= form.label :industry, "Company's industry ", class: "label" %>
+    <%= form.text_field :industry, class: "input", placeholder: "Example:Idea, Advertising, IT, Gaming, ..." %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :found_date, "Founded Date", class: "label" %>
+    <%= form.text_field :found_date, class: "input", placeholder: "When your company was founded" %>
+  </div>
+
+
+
+        <div class="mb-6">
+
+
+          <div class="row team_members-body">
+            <br><hr>
+            <strong><h3>List your team</h3></strong>
+            <p><i>List your team of bulletproof talent to attract future co-workers and investors e.g. Founder(s), C-suite and key staff</i></p>
+            <br>
+        
+            <div data-controller="nested-form">
+              
+              <template data-target='nested-form.template'>
+                <%= form.fields_for :team_members,  TeamMember.new, child_index: 'TEMPLATE_RECORD' do |member| %>
+                  <%= render 'team_member_fields', form: member %>
+                <% end %>
+              </template>
+                
+                
+                <%= form.fields_for :team_members do |member| %>
+                  <%= render 'team_member_fields', form: member %>
+                <% end %>
+                
+                <div data-target="nested-form.add_item">
+                <%= link_to  "Add member", "#", data: { action: "nested-form#add_association" } %>
+                </div>
+
+            <div>
+          </div>
+        </div>
 
   <div class="mb-6">
     <%= form.submit class: "btn btn-default" %>
