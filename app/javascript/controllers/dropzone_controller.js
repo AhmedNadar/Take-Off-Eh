@@ -65,6 +65,19 @@ export default class extends Controller {
     return this.data.get("addRemoveLinks") || true;
   }
 
+  get addedfile() {
+    return this.data.get("thumbnail");
+  }
+
+
+  // // Call the default addedfile event handler
+  //   headerDropzone.options.addedfile.call( headerDropzone, on_load_header_data );
+
+  //   // And optionally show the thumbnail of the file:
+  //   headerDropzone.options. thumbnail.call( headerDropzone, on_load_header_data, on_load_header_path);
+
+
+
 }
 
 class DirectUploadController {
@@ -151,6 +164,7 @@ function createDropZone(controller) {
     maxFilesize: controller.maxFileSize,
     acceptedFiles: controller.acceptedFiles,
     addRemoveLinks: controller.addRemoveLinks,
+    thumbnail: controller.thumbnail,
     autoQueue: false
   });
 }

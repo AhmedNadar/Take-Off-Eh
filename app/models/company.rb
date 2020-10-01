@@ -54,6 +54,7 @@ class Company < ApplicationRecord
   scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
 
 
+  
   def slug_candidates
     [:name, [:name]]
   end
