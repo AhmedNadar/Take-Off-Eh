@@ -12,7 +12,8 @@ require("@rails/actiontext")
 require("local-time").start()
 // Cocoon makes it easier to handle nested forms.
 require("jquery")
+require("@nathanvda/cocoon")
 
-import "controllers" // imports all files with controllers folder and run index file
+import "controllers" // imports all files with controllers folder and run inde
 import "stylesheets/application"
 // import "src/job_form";

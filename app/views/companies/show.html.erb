@@ -7,7 +7,7 @@
       </div>
 
 
-      <div class="flex flex-wrap items-start justify-between w-full mb-6">
+      <div id="photos" class="flex flex-wrap items-start justify-between w-full mb-6">
   
         <div class="w-full mt-6 lg:pr-10 lg:w-4/5 lg:mt-0">
           <div class="mb-6">
@@ -16,17 +16,9 @@
           </div>        
 
 
-        <div class="w-full lg:w-full">
-          <div class="grid grid-cols-2 gap-2">
-            <% (0...@company.company_images.count).each do |image| %>
-              <%#= image_tag(@company.company_images[image], class: "rounded-lg md:w-90") %>
-              <%= image_tag(@company.thumbnail(image), class: "rounded-lg") %>            
-              <%#= image_tag(@company.company_images[image]) %>
-            <% end %>
-          </div>          
-        </div>
+          <div class=""><%= render 'photos_list' %></div>
         
-        </div>   
+      </div>   
 
         
 
@@ -108,8 +100,8 @@
         <% @company.team_members.each do |member| %>
           <div class="col-md-3 col-sm-3">
               <div class="thumbnail">
-                <%= image_tag member.member_photo.variant(resize: '100x100!').processed, class: "rounded-full h-56 w-56 mx-auto", alt: member.title %>
-                
+                <%= image_tag member.member_photo.variant(resize: '100x100!').processed, class: "rounded-full h-56 w-56 mx-auto", alt: member.title %>            
+                            
                 <div class="caption">
                   <h6 class="name"><%= member.title.capitalize %></h6>
                   <h6 class="name"><%= member.first_name.capitalize %></h6>

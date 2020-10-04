@@ -15,5 +15,4 @@ export default class extends Controller {
     item.querySelector("input[name*='_destroy']").value = 1
     item.style.display = 'none'
   }
-
 }
