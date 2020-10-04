@@ -1,4 +1,14 @@
-<% content_for :devise_form do %>
+
+<div class="w-full max-w-screen-xl px-6 mx-auto">
+
+<div class="inset-0 flex hidden w-full h-full pt-16 -mb-16 bg-white border-b z-90 lg:-mb-0 lg:static lg:h-auto lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block lg:border-0 xl:w-1/5">
+  
+  <%= link_to "View my profile", user_path(current_user), class: "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" %>
+</div>
+
+
+<div class="w-full min-h-screen lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5">
+  <% content_for :devise_form do %>
   <h2 class="pt-4 mb-8 text-4xl font-bold heading">Edit <%= resource_name.to_s.humanize %></h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -38,12 +48,16 @@
       <%= f.label :password_confirmation, class: "label" %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input" %>
     </div>
-
+<%
+=begin%>
+ 
     <div class="input-group">
       <%= f.label :current_password, class: "label" %>
       <%= f.password_field :current_password, autocomplete: "current-password", class: "input" %>
       <p class="pt-2 text-sm italic text-grey-dark">(we need your current password to confirm your changes)</p>
-    </div>
+    </div> 
+<%
+=end%>
 
     <div class="input-group">
       <%= f.submit "Update", class: "btn btn-default" %>
@@ -62,6 +76,10 @@
     <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-red" %>
   </div>
 
-<% end %>
+  <% end %>
 
-<%= render 'devise/shared/form_wrap' %>
+  <%= render 'devise/shared/form_wrap' %>
+</div>
+
+
+</div>

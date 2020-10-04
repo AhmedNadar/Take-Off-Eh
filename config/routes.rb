@@ -8,22 +8,20 @@ Rails.application.routes.draw do
   end
   
   root to: 'home#index'
-  resources :users
+  resources :users, only: [:show, :index]
   resources :companies
   resources :dashboard, only: [:index]
   
-  devise_for  :users, path: 'profile', 
-                    path_names:  { 
-                      sign_out: 'signout', 
-                      edit: 'settings' 
-                    }
+  devise_for :users,  path: 'profile', 
+                      path_names: { sign_out: 'logout', edit: 'settings' },
+                      controllers: {
+                        registrations: 'registrations'}
                     
   devise_scope :user do
-    get 'signup', to: 'devise/registrations#new'
-  end
-  
-  devise_scope :user do
-    get 'login', to: 'devise/sessions#new'
+    get '/register', to: 'devise/registrations#new'
+    get '/login', to: 'devise/sessions#new'
+    get 'profile/edit', to: 'devise/registrations#edit'
+    get 'profile/cancel', to: 'devise/registrations#cancel'
   end
   
   get 'mycompanies'     => 'companies#my_companies'

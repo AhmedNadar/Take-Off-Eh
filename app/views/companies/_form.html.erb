@@ -12,7 +12,6 @@
       </div>
     <% end %>
     
-
     <%
 =begin%>
  <div class="mb-6">
@@ -118,10 +117,11 @@
 
 
             <div class="row team_members-body">
-              <br><hr>
-              <strong><h3>List your team</h3></strong>
+              <h3 class="mt-2 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
+                Team Member photo
+              </h3>
               <p><i>List your team of bulletproof talent to attract future co-workers and investors e.g. Founder(s), C-suite and key staff</i></p>
-              <br>
+              
           
               <div data-controller="nested-form">
                 
@@ -137,7 +137,7 @@
                   <% end %>
                   
                   <div data-target="nested-form.add_item">
-                  <%= link_to  "Add member", "#", data: { action: "nested-form#add_association" } %>
+                  <%= link_to  "Add member", "#", data: { action: "nested-form#add_association" } %>            
                   </div>
 
               <div>

@@ -22,14 +22,28 @@ include NavigationHelper
     current = current_page?(path) ? "current-page" : ""
   end  
 
+  # def gravatar_for(user)
+  #   if user.email?
+  #       gravatar_id  = Digest::MD5::hexdigest(user.email.downcase)
+  #       gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=200"
+  #   else
+  #       "../assets/medium-default-avatar.png"
+  #   end
+  # end
+
+
   def gravatar_for(user)
-    if user.email?
-        gravatar_id  = Digest::MD5::hexdigest(user.email.downcase)
-        gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=200"
-    else
-        "../assets/medium-default-avatar.png"
-    end
+    gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=40"
+
+    # if user.image
+    #   user.image
+    # else
+    #   gravatar_url
+    # end
   end
+
+
 
   # readable time
   def readable_time(time)
