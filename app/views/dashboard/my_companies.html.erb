@@ -1,0 +1,36 @@
+<% if current_user.companies.empty? %>
+  <section class="my_companies">
+    <div class="header-internal" data-bg="companies" style="height: 250px;">
+      <div class="inside">
+        <h1>My Companies</h1>
+      </div>
+      <div class="backstretch" style="background-image: none;">
+        <div class="overlay"></div>
+      </div>
+    </div>
+  </section>
+  <div class="container full-height">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="container">
+          <h3>No Companies</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+<h1>My Companies</h1>
+<% @my_companies.each do |company| %>
+  <%= link_to company do %>
+    <%= image_tag company.logo_resize, class: "rounded-full h-56 w-56 mx-auto" if company.present? %>
+  <%#= image_tag member.member_photo.variant(resize: '100x100!').processed, class: "rounded-full h-56 w-56 mx-auto", alt: member.title %>            
+
+  <br/>
+  <p><%= link_to company.name, company %></p>
+  <p><%= link_to "Edit #{company.name} ", edit_company_path(company), class: "margin-r1", title: "Edit #{company.name}", data:{toggle: "tooltip", placement: "top"}%></p>
+  <br/>
+  <% end %>
+  
+<% end %>
+
+<% end %>

@@ -43,7 +43,8 @@ class User < ApplicationRecord
   has_person_name    
   has_one_attached  :picture
   has_many :companies, dependent: :destroy
-  # has_many :team_members, dependent: :destroy
+  has_many :jobs, dependent: :destroy
+  has_many :team_members, dependent: :destroy
   
   # validation
   validates :first_name,  presence: true, length: { maximum: 20 }

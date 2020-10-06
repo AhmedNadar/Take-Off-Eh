@@ -8,9 +8,7 @@ Rails.application.routes.draw do
   
   root to: 'home#index'
   resources :users, only: [:show, :index]
-  resources :companies
   resources :dashboard, only: [:index]
-  resources :jobs
   
   devise_for :users,  path: 'profile', 
                       path_names: { sign_out: 'logout', edit: 'settings' },
@@ -23,8 +21,21 @@ Rails.application.routes.draw do
     get 'profile/edit', to: 'devise/registrations#edit'
     get 'profile/cancel', to: 'devise/registrations#cancel'
   end
-  
-  get 'mycompanies'     => 'companies#my_companies'
+
+  resources :jobs do
+    collection do
+      get '/my_jobs', to: 'jobs#my_jobs', as: :user
+    end
+  end
+  resources :companies do
+    collection do
+      get '/my_companies', to: 'companies#my_companies', as: :user
+    end
+  end
+
+  get 'my_companies' => 'companies#my_companies'
+  get 'my_jobs' => 'jobs#my_jobs'
   get '/dashboard' => 'dashboard#index'
+  get '/dashboard/companies' => 'dashboard#companies'
 
 end

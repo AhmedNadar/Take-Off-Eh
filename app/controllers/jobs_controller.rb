@@ -27,7 +27,7 @@ class JobsController < ApplicationController
 
   def create
     @job = Job.new(job_params)
-    @job.user_id = current_user.id
+    @job.user = current_user
     @job.save
     respond_with(@job)
   end
@@ -43,9 +43,9 @@ class JobsController < ApplicationController
   end
 
   # scope simply loads all the posts that belong to a user
-  # def user_jobs
-  #   @my_jobs = current_user.compjobs
-  # end
+  def my_jobs
+    @my_jobs = current_user.jobs
+  end
 
   private
     def set_job
@@ -67,7 +67,8 @@ class JobsController < ApplicationController
                                   :featured_until,
                                   :featured,
                                   :slug,
-                                  :company_id
+                                  :company_id,
+                                  :user_id
                                 )
     end
 end

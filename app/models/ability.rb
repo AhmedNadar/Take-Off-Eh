@@ -17,6 +17,7 @@ class Ability
       else user.has_role? :client
         # user authorize
         can :manage, Company, user_id: user.id 
+        can :manage, Job, user_id: user.id
       end
     end
   end

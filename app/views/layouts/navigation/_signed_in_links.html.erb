@@ -6,11 +6,13 @@
 </p> 
 
 <%= link_to "New Company", new_company_path, class: "ml-8 font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-900" %>
-<%= link_to "My companies", mycompanies_path, class: "ml-8 font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-900" %>
+<%= link_to "New Job", new_job_path, class: "ml-8 font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-900" %>
+<%= link_to "My companies", my_companies_path, class: "ml-8 font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-900" %>
+<%= link_to "My Dashboard", dashboard_index_path, class: "ml-8 font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-900" %>
 <%= link_to "Settings", edit_user_registration_path, class: "ml-8 font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-900"%>
 
   <% if :admin? %>
-    <%= link_to 'Community', users_path, class: "ml-8 font-medium text-black-500 transition duration-150 ease-in-out hover:text-gray-500" %>  
+    <%#= link_to 'Community', users_path, class: "ml-8 font-medium text-black-500 transition duration-150 ease-in-out hover:text-gray-500" %>  
   <% end %>
 
 <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "ml-8 font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-900" %>

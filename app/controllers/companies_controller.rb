@@ -31,7 +31,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(company_params)
     @company.user = current_user
-    @company.team_members.first.user_id = current_user.id
+    # @company.team_members.first.user_id = current_user.id
     # @company.user_id = current_user.id
     @company.save
     respond_with(@company)
