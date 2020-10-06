@@ -2,15 +2,21 @@
 #
 # Table name: companies
 #
-#  id         :bigint           not null, primary key
-#  email      :string
-#  found_date :date
-#  name       :string
-#  slug       :string           indexed
-#  website    :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null, indexed
+#  id             :bigint           not null, primary key
+#  business_model :string
+#  company_size   :integer
+#  email          :string
+#  found_date     :string
+#  headquarter    :string
+#  industry       :string
+#  name           :string
+#  phone_number   :string
+#  slug           :string           indexed
+#  stage          :string
+#  website        :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  user_id        :bigint           not null, indexed
 #
 # Indexes
 #
@@ -23,10 +29,9 @@
 #
 class Company < ApplicationRecord
   has_paper_trail
-  rolify
-  # resourcify
+  
+  # include Sluggable
   extend FriendlyId
-
   friendly_id :slug_candidates, use: [:slugged, :finders]
 
   belongs_to :user, dependent: :destroy
@@ -34,6 +39,7 @@ class Company < ApplicationRecord
   has_one_attached :company_logo
   has_many_attached :company_images
   has_many :team_members, dependent: :destroy, inverse_of: :company
+  has_many :jobs
 
   accepts_nested_attributes_for :team_members, allow_destroy: true, reject_if: proc { |attr| attr['title'].blank?}
 
@@ -43,7 +49,7 @@ class Company < ApplicationRecord
   validates :details,       presence: true
   validates :email,         presence: true
   validates :website,       presence: true
-  # validates :found_date,    presence: true
+  validates :found_date,    presence: true
   # validates :company_logo,  presence: true
   # validates :company_images,  presence: true
   validate :company_logo_format
@@ -52,20 +58,6 @@ class Company < ApplicationRecord
   
   # Note that implicit association has a plural form in this case
   scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
-
-
-  
-  def slug_candidates
-    [:name, [:name]]
-  end
-
-  def should_generate_new_friendly_id?
-    if !slug?
-      name_changed?
-    else
-      false
-    end
-  end
 
   # Defind company's gallery images size
   def thumbnail input
@@ -76,6 +68,14 @@ class Company < ApplicationRecord
     return self.company_logo.variant(resize: '100x100%').processed
   end
 
+  def slug_candidates
+    [:name]
+  end
+
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
+  end
+  
   private
 
     def company_logo_format

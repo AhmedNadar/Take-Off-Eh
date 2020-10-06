@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_27_181024) do
+ActiveRecord::Schema.define(version: 2020_10_05_090125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_09_27_181024) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.string "suggested_url"
     t.string "headquarter"
     t.integer "company_size"
     t.string "phone_number"
@@ -74,6 +75,30 @@ ActiveRecord::Schema.define(version: 2020_09_27_181024) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string "title"
+    t.string "job_type"
+    t.string "link_to_apply"
+    t.string "category"
+    t.string "region"
+    t.string "company_statement"
+    t.string "status", default: "pending"
+    t.boolean "remote", default: false
+    t.integer "price"
+    t.datetime "published_at"
+    t.datetime "featured_until"
+    t.boolean "featured", default: false
+    t.bigint "company_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.string "suggested_url"
+    t.index ["company_id"], name: "index_jobs_on_company_id"
+    t.index ["slug"], name: "index_jobs_on_slug", unique: true
+    t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -109,6 +134,7 @@ ActiveRecord::Schema.define(version: 2020_09_27_181024) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.string "suggested_url"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
@@ -134,5 +160,7 @@ ActiveRecord::Schema.define(version: 2020_09_27_181024) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "companies", "users"
+  add_foreign_key "jobs", "companies"
+  add_foreign_key "jobs", "users"
   add_foreign_key "team_members", "companies"
 end

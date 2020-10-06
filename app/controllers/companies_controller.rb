@@ -14,7 +14,8 @@ class CompaniesController < ApplicationController
 
   def show
     respond_with(@company)
-    # @team_members = @company.team_members.all
+    @team_members = @company.team_members.all
+    redirect_to_slug(action: :show, object: set_company)
   end
 
   def new
@@ -30,7 +31,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(company_params)
     @company.user = current_user
-    # @company.team_members.first.user_id = current_user.id
+    @company.team_members.first.user_id = current_user.id
     # @company.user_id = current_user.id
     @company.save
     respond_with(@company)

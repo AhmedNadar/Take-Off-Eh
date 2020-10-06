@@ -2,7 +2,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do  
-
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
@@ -11,6 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index]
   resources :companies
   resources :dashboard, only: [:index]
+  resources :jobs
   
   devise_for :users,  path: 'profile', 
                       path_names: { sign_out: 'logout', edit: 'settings' },

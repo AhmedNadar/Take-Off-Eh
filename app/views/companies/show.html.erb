@@ -93,6 +93,18 @@
                 <%= @company.industry %>
               </div>          
             <% end %>
+
+            <% if @company.jobs.present? %>
+                Jobs:  
+              <% @company.jobs.each do |job|%>
+                <ul>
+                  <li><%= link_to job.title, job, class: "text-blue-600" %></li>
+                </ul>             
+              <% end %>
+
+              <% else %>
+              <%= link_to "Create a Job", new_job_path, class: "btn btn-default" %>           
+            <% end %>
           </div>              
         </div>  
         

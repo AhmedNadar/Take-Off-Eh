@@ -1,0 +1,80 @@
+
+<div class="container flex flex-wrap items-center justify-center mx-auto">
+  <%= form_with(model: job, local: true, multipart: true, id: "new_job") do |form| %>
+    <% if job.errors.any? %>
+      <div id="error_explanation" class="p-6 mb-5 text-red-500 bg-white rounded">
+        <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+        <ul>
+          <% job.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-6">
+      <%= form.label :title, "Job tile" , class: "label"  %>
+      <%= form.text_field :title, class: "input", required: 'required', placeholder: "Job Title" %>
+    </div>
+    
+
+    <div class="mb-6">
+      <%= form.label :description, "Job Description" , class: "label"  %>
+      <%= form.text_area :description, class: "input", required: 'required', placeholder: "Job Description" %>
+    </div>
+
+    <div class="lg:w-1/2 input-group input-checkbox">
+      <%= form.check_box :remote %>
+      <%= form.label :remote, "Is this a remote only role?", class: "label"%>
+    </div>
+
+  <div class="mb-6">
+    <% if current_user.companies.exists? %>
+      <%= form.label :company_id, "What company this job belongs to ..." , class: "label"  %>
+      <%= form.collection_select :company_id, current_user.companies.all, :id, :name, prompt: "Select a Company", required: true, class: "select" %>   
+    <% else %>
+      <label>In order to create a job, you need have a company first</label><br>
+      <%= link_to "Create a company profile", new_company_path, class: "btn btn-default" %>
+    <% end %>
+  </div>
+
+  
+
+    <div class="mb-6">
+      <%= form.label :link_to_apply, "How to Apply" , class: "label"  %>
+      <%= form.text_field :link_to_apply, class: "input", required: 'required', placeholder: "Link to Application page or Email address" %>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-start lg:flex-no-wrap input-group">
+      <div class="w-full mb-6 lg:pr-4 lg:w-3/4 lg:mb-0">
+        <%= form.label :region, class: "label" %>
+        <div class="relative">
+          <%= form.select :region, Job::JOB_REGION,{}, { class: "select" } %>        
+        </div>
+      </div>
+
+      <div class="w-full lg:pl-4 lg:w-auto">
+        <%= form.label :job_type, "Job Type" , class: "label"  %>
+        <%= form.select :job_type, Job::JOB_TYPES,{}, { class: "select" } %>
+      </div>
+    </div>
+
+    <div class="w-full mb-6 lg:px-2 lg:w-auto lg:mb-0">
+      <%= form.label :company_statement, "Company Statement" , class: "label"  %>
+      <%= form.text_area :company_statement, class: "input" %>
+    </div>
+
+    
+    <div class="mb-6">
+      <%= form.label :category, "Job Category"  , class: "label" %>
+      <%= form.select :category, Job::JOB_CATEGORY,{}, { class: "select" } %>
+    </div>
+
+
+
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-green"%>
+    </div>
+  <% end %>

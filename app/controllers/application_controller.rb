@@ -28,5 +28,9 @@ class ApplicationController < ActionController::Base
     def after_sign_out_path_for(resource)
       flash[:notice] = "Goodbye for now, and come back again! 😀"
       root_path
-    end      
+    end
+     
+    def redirect_to_slug(action:, object:)
+      redirect_to action: action, id: object.friendly_id, status: 301 unless object.friendly_id == params[:id]
+    end         
 end

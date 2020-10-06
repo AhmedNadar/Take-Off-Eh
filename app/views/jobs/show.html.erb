@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @job.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @job.description %>
+</p>
+
+<p>
+  <strong>Company Name:</strong>
+  <%= link_to @job.company.name, @job.company %>
+</p>
+
+<p>
+  <strong>Company Logo:</strong>
+  <%= image_tag(@job.company.company_logo.variant(resize: '100x100!').processed, class: "rounded-full h-56 w-56 mx-auto") %>
+</p>
+
+<p>
+  <strong>Posted by:</strong>
+  <%= @job.company.user.name %>
+</p>
+
+
+<p>
+  <strong>Job category:</strong>
+  <%= @job.category %>
+</p>
+
+<p>
+  <strong>Company Statement:</strong>
+  <%= @job.company_statement %>
+</p>
+
+<p>
+  <strong>Remote:</strong>
+  <%= @job.remote %>
+</p>
+
+<p>
+  <strong>Link to apply:</strong>
+  <%= @job.link_to_apply %>
+</p>
+
+<p>
+  <strong>Job Type:</strong>
+  <%= @job.job_type %>
+</p>
+
+<p>
+  <strong>Region:</strong>
+  <%= @job.region %>
+</p>
+
+
+<%= link_to 'Edit', edit_job_path(@job) %> |
+<%= link_to 'Back', jobs_path %>
