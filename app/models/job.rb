@@ -40,8 +40,8 @@ class Job < ApplicationRecord
   friendly_id :slug_candidates, use: [:slugged, :finders]
 
   #association
-  belongs_to        :company, dependent: :destroy
-  belongs_to        :user, dependent: :destroy
+  belongs_to        :company
+  belongs_to        :user
   has_rich_text     :description
   
   #validation

@@ -34,12 +34,12 @@ class Company < ApplicationRecord
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]
 
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
   has_rich_text :details
-  has_one_attached :company_logo
-  has_many_attached :company_images
+  has_one_attached :company_logo, dependent: :destroy
+  has_many_attached :company_images, dependent: :destroy
   has_many :team_members, dependent: :destroy, inverse_of: :company
-  has_many :jobs
+  has_many :jobs, dependent: :destroy
 
   accepts_nested_attributes_for :team_members, allow_destroy: true, reject_if: proc { |attr| attr['title'].blank?}
 

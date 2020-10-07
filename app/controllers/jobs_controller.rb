@@ -28,8 +28,44 @@ class JobsController < ApplicationController
   def create
     @job = Job.new(job_params)
     @job.user = current_user
+
+    token           = params[:stripeToken]
+    card_brand      = params[:user][:card_brand]
+    card_exp_month  = params[:user][:card_exp_month]
+    card_exp_year   = params[:user][:card_exp_year]
+    card_last4      = params[:user][:card_last4]
+
+    # Create a Customer
+    customer = Stripe::Customer.create ({
+      source: token,
+      email: current_user.email,
+      name: current_user.name,
+      phone: @job.company.phone_number
+    })
+
+    # Create a charge
+    charge = Stripe::Charge.create(
+      customer:               customer.id,
+      amount:                 29900,
+      currency:               'cad',
+      description:            @job.title,
+      statement_descriptor:   'A 299$ job listing!',
+      receipt_email:          @job.user.email
+    )
+
+    current_user.stripe_id      = charge.id
+    current_user.card_brand     = card_brand
+    current_user.card_exp_month = card_exp_month
+    current_user.card_exp_year  = card_exp_year
+    current_user.card_last4     = card_last4
+    current_user.save!
+
     @job.save
     respond_with(@job)
+
+    rescue Stripe::CardError => e
+    flash.alert = e.message
+    render action: :new
   end
 
   def update

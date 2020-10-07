@@ -16,4 +16,4 @@ require("@nathanvda/cocoon")
 
 import "controllers" // imports all files with controllers folder and run inde
 import "stylesheets/application"
-// import "src/job_form";
+import "components/charges"
