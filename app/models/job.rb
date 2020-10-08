@@ -51,6 +51,7 @@ class Job < ApplicationRecord
             :link_to_apply,
             :region,
             :category,
+            :company,
             presence: true
 
   # scopes

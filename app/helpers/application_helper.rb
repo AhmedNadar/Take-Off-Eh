@@ -54,4 +54,26 @@ include NavigationHelper
     user_signed_in? && resource.user_id == current_user.id
   end
 
+  def meta_author
+    "Ahmed Nadar"
+  end
+
+  def meta_description
+    "Built In Toronto is the online community for Toronto startups and tech companies. Find startup jobs, tech news and events."
+  end
+
+  def meta_keywords
+    "Toronto, Startup, tech companies"
+  end
+
+  def site_url
+    if Rails.env.production?
+      # Place production URL
+      "http://builtintoronto.org/"
+    else
+      # Our dev & test URL.
+      "http://localhost:3000"
+    end
+  end
+  
 end

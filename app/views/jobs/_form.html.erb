@@ -32,10 +32,10 @@
   <div class="mb-6">
     <% if current_user.companies.exists? %>
       <%= form.label :company_id, "What company this job belongs to ..." , class: "label"  %>
-      <%= form.collection_select :company_id, current_user.companies.all, :id, :name, prompt: "Select a Company", required: true, class: "select" %>   
+      <%= form.collection_select :company_id, current_user.companies.all, :id, :name, prompt: "Select a Company for this job", required: 'required', class: "select" %>   
     <% else %>
       <label>In order to create a job, you need have a company first</label><br>
-      <%= link_to "Create a company profile", new_company_path, class: "btn btn-default" %>
+      <%= link_to "Create a company profile to associate to this job", new_company_path, class: "btn btn-default" %>
     <% end %>
   </div>
 
