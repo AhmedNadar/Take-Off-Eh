@@ -12,6 +12,7 @@
     "@tailwindcss/typography": "^0.2.0",
     "dropzone": "^5.7.2",
     "jquery": "^3.5.1",
+    "ky": "^0.24.0",
     "local-time": "^2.1.0",
     "stimulus": "^1.1.1",
     "tailwindcss": "^1.5.2",
@@ -19,7 +20,8 @@
     "turbolinks": "^5.2.0",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.3",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.12",
+    "vue-turbolinks": "^2.1.0"
   },
   "version": "0.1.0",
   "devDependencies": {

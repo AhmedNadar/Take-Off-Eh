@@ -1,18 +1,18 @@
-// Visit The Stimulus Handbook for more details 
-// https://stimulusjs.org/handbook/introduction
-// 
-// This example controller works with specially annotated HTML like:
-//
-// <div data-controller="hello">
-//   <h1 data-target="hello.output"></h1>
-// </div>
-
+import data from "../store"
 import { Controller } from "stimulus"
-
-export default class extends Controller {
-  static targets = [ "output" ]
+import Vue from "vue"
+const VueComponent = (component) => class extends Controller {
+  static targets = ["mount"]
 
   connect() {
-    this.outputTarget.textContent = 'Hello, Stimulus!'
+    const el = this.mountTarget
+
+    window.jobForm = new Vue({
+      el,
+      render: h => h(component),
+      data: data.store
+    })
   }
 }
+
+export default VueComponent

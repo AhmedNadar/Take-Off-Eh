@@ -147,4 +147,45 @@
   - [Markdown syntax](https://www.markdownguide.org/basic-syntax)
   - [Rails 5.2: Active Storage and beyond](https://evilmartians.com/chronicles/rails-5-2-active-storage-and-beyond)
   - [Eager Loading/Querying Against ActiveStorage Attachments](https://jasoncharnes.com/eager-loading-querying-against-activestorage-attachments/)
-  - 
+
+
+
+
+### Process
+- add investor account attributes
+  `rails g scaffold Investor name website type_of_investor estimated_funding startup_stages industry business_model investable_regions user:references`
+
+## Models
+
+#### UserModel
+- name(first and last), email , user_name, password
+- has_many :companies
+- has_many :jobs
+- has_many :contacts
+- has_many :team_members
+
+#### InvestorModel
+- user_id, company_name, type_of_investor, geographical_focus, sectors_invested_in, preferred_investment_stage,
+- estimated_funding, startup_stages, industry, mission, description, photo,
+- funds_to_invest, active > default: true, 
+- has_many :contacts
+- has_many :funds
+- belongs_to :user
+
+
+#### FundModel
+- investor_id, geographical_focus, funding_amount, funds_needed, sector,   
+
+#### ContactModel
+- phone, address, twitter, instagram, linked_in, facebook, skype, angellist, website, 
+
+#### CompanyModel
+- user_id, name , description, url,business_model, company_size, email, found_date, 
+- headquarter, industry, phone_number, slug, stage, website, 
+
+#### JobModel
+- user_id, company_id, title, category, company_statement, featured, featured_until, job_type,
+- link_to_apply, price, published_at, region, remote
+
+#### TeamMemberModel
+- user_id, company_id, email, first_name, last_name, profile_link, title, 
