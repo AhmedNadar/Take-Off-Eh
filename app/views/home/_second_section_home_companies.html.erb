@@ -1,0 +1,31 @@
+<section class="py-8 bg-white">
+  <div class="container grid justify-center grid-cols-1 gap-2 px-2 pt-16 pb-16 mx-auto max-w-screen-l">
+    <h1 class="mb-2 text-3xl font-bold leading-tight text-center sm:text-2xl md:text-3xl lg:text-4xl font-display">Discover hundrands of growing startups in Torotno</h1>
+    <p class="max-w-xl mx-auto mt-4 mb-12 text-lg text-center text-gray-600 sm:text-lg md:text-xl lg:text-xl md:text-l">
+      Experince the startup ecosystem - invest in startups, research the fastest growing companies, and find a job you love.
+    </p>
+    
+    <div class="grid sm:gap-4 sm:mx-2 grid-cols-24 sm:gap-y-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4">
+      <% @companies.each do |company| %>
+      <%= link_to company_path(company), class:"col-start-2 col-span-22 sm:col-span-1", alt:" View #{company.name}", title:"View #{company.name}" do %>
+        <div class="flex items-start max-h-full">
+          <div class="relative w-full p-4 border border-gray-200 rounded shadow-md min-h-card">                    
+            <%= image_tag company.company_logo.variant(resize: '70x70!'), class:"mb-4 rounded-full", alt:"#{company.name} logo" if company.company_logo.present? %>
+            <h3 class="text-xl font-bold font-heading"><%= truncate(strip_tags(company.name.to_s), length: 18) %></h3>        
+            <p class="mt-4 mb-4 text-sm leading-relaxed text-gray-800"><%= truncate(strip_tags(company.details.to_s), length: 140) %></p>
+            <div class="absolute inset-x-0 bottom-0 flex flex-wrap justify-between pb-4 pl-4 pr-4">              
+              <span class="px-3 py-1 text-sm font-semibold"><%= truncate(strip_tags(company.industry.to_s), length: 20) %></span>
+              <% if company.jobs.exists? %>
+                <span class="items-end px-3 py-1 text-sm font-semibold text-black rounded bg-yellow-bit"><%= pluralize(company.jobs.count, 'job') %> </span>
+              <% end %>  
+            </div>
+          </div>          
+        </div>
+      <% end %>
+      <% end %>
+    </div>  
+    <p class="max-w-xl mx-auto mt-8 mb-12 text-center">
+      <%= link_to "Discover more local companies", companies_path, class: "sm:text-lg md:text-xl text-pink-500 underline font-bold transition duration-150 ease-in-out hover:text-indigo-600" %>
+    </p>
+  </div>
+</section>  

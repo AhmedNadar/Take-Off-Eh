@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def show
     @user = User.friendly.find(params[:id])
     @companies = @user.companies
-    @blogs     = @user.blogs
+    # @blogs     = @user.blogs
 
     unless current_user.admin?
       unless @user == current_user

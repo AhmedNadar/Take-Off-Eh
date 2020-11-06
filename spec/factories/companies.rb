@@ -13,6 +13,7 @@
 #  phone_number   :string
 #  slug           :string           indexed
 #  stage          :string
+#  suggested_url  :string
 #  website        :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

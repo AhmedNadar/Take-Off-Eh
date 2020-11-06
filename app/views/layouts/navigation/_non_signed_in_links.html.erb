@@ -1,3 +1,6 @@
-<%= link_to "Login", new_user_session_path, class:"ml-8 font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-900" %>
-<%= link_to "Sign Up", new_user_registration_path, class:"ml-8 font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-900" %>
-
+<div class="hidden w-full navbar-menu lg:order-3 lg:block lg:w-3/5 lg:text-right">
+  <%= link_to "Companies", companies_path,            class: "mr-4 font-medium text-gray-800 transition duration-150 ease-in-out hover:text-black" %>
+  <%= link_to "Jobs", jobs_path,                      class: "mr-4 font-medium text-gray-800 transition duration-150 ease-in-out hover:text-black" %>
+  <%= link_to "Login", new_user_session_path,         class: "mr-4 font-medium font-bold text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-900" %>
+  <%= link_to "Sign Up", new_user_registration_path,  class: "mr-4 font-medium font-bold text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-900" %>
+</div>

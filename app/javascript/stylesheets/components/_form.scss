@@ -34,3 +34,61 @@
     }
   }
 }
+
+
+
+// .background-full-image  {
+//   background: linear-gradient(90deg, #ccccf7 0%, #7cefe4 100%);
+//   background-image: url("/assets/toronto-francesca-saraco-u8DiM00gIR8-unsplash.jpg");
+// }
+// .hero { 
+//     position: relative; 
+//     height: 100vh;
+//     width: 100%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     background-image: url('https://placekitten.com/1200/800');
+//     background-size: cover;
+// }
+
+// .hero::before {
+//     content: "";
+//     position: absolute;
+//     top: 0px;
+//     right: 0px;
+//     bottom: 0px;
+//     left: 0px;
+//     background-color: rgba(0,0,0,0.25);
+// }
+
+
+    .abs_bg {
+      background-color: rgb(255, 247, 236);
+      background-image: url("/assets/BIT_abstract_bg.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+    }
+    .abs_bg::before {
+      content: "";
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;      
+      opacity: .6;
+    }
+    
+    .home_top_bg {
+      background-color: rgb(255, 255, 255);
+      background-image: url("/assets/home_header_bg.png");    
+    }
+    
+
+
+
+    

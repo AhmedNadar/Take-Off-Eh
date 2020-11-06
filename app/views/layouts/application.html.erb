@@ -3,16 +3,14 @@
 <html class="antialiased">
   <%= render "shared/head" %>
 
-  <body class="relative antialiased leading-normal text-gray-800">
+  <body class="relative antialiased leading-normal text-gray-900">
     <%= render "shared/flash_notice" %>
-    <%= render "shared/header" %>
+    <%= render "shared/header" unless current_page?(new_job_url) %>
 
-    <main class="relative overflow-x-hidden">
-      <section class="relative px-4 pt-10 lg:pt-20 lg:px-0">
+    <main class="overflow-x-hidden" id="content">
+      <div class="sm:pt-20 lg:pt-20">
         <%= content_for?(:content) ? yield(:content) : yield %>
-      </section>
-
-
+      </div>
     </main>
   </body>
 </html>

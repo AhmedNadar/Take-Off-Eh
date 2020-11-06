@@ -1,18 +1,18 @@
+<div class="hidden w-full navbar-menu lg:order-3 lg:block lg:w-3/5 lg:text-right">
+  <p class="block mt-4 mb-2 lead lg:inline-block lg:mt-0 lg:mr-4 lg:mb-0">
+    Welcome, <strong><%= (current_user.name || current_user.email) %>! </strong>
+    <%#= image_tag gravatar_for(current_user) , alt: current_user.name, title: current_user.name, class: "h-8 w-8 rounded-full mx" %>
+  </p> 
+  <%= link_to "New Company", new_company_path,          class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
+  <%= link_to "New Job", new_job_path,                  class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
+  <%= link_to "My companies", my_companies_path,        class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
+  <%= link_to "My Dashboard", dashboard_index_path,     class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
+  <%= link_to "Settings", edit_user_registration_path,  class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black"%>
+    <% if :admin? %>
+      <%= link_to 'Community', users_path,              class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>  
+    <% end %>
+  <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "mr-4 font-medium font-bold text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-900" %>
+</div>
 
- <p class="block mt-4 mb-2 lead lg:inline-block lg:mt-0 lg:mr-4 lg:mb-0">
-  Welcome, 
-    <strong><%= (current_user.name || current_user.email) %> ! </strong>
-    <%= image_tag gravatar_for(current_user) , alt: current_user.name, title: current_user.name, class: "h-8 w-8 rounded-full mx" %>
-</p> 
 
-<%= link_to "New Company", new_company_path, class: "ml-8 font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-900" %>
-<%= link_to "New Job", new_job_path, class: "ml-8 font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-900" %>
-<%= link_to "My companies", my_companies_path, class: "ml-8 font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-900" %>
-<%= link_to "My Dashboard", dashboard_index_path, class: "ml-8 font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-900" %>
-<%= link_to "Settings", edit_user_registration_path, class: "ml-8 font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-900"%>
 
-  <% if :admin? %>
-    <%#= link_to 'Community', users_path, class: "ml-8 font-medium text-black-500 transition duration-150 ease-in-out hover:text-gray-500" %>  
-  <% end %>
-
-<%= link_to "Log out", destroy_user_session_path, method: :delete, class: "ml-8 font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-900" %>

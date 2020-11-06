@@ -64,11 +64,11 @@ class Job < ApplicationRecord
 
   #https://stackoverflow.com/questions/1956191/ruby-on-rails-drop-down-menu
 
-  JOB_TYPES = ["Full-time", "Part-time", "Contract", "Freelance"]
+  JOB_TYPES = ["Full-time", "Part-time", "Contract", "Freelance"].freeze
 
-  JOB_CATEGORY = ["Design", "Programming", "Customer Support", "Copywriting", "DevOps and Sysadmin", "Sales and Marketing", "Business, Management and Finance", "Product", "Other Category"]
+  JOB_CATEGORY = ["Design", "Programming", "Customer Support", "Copywriting", "DevOps and Sysadmin", "Sales and Marketing", "Business, Management and Finance", "Product", "Other Category"].freeze
   
-  JOB_REGION = ["Anywhere (100% Remote) Only", "Toronto Down Town", "North York", "York", "East York", "Scraborough", "Etobicoke"]
+  JOB_REGION = ["100% Remote", "DownTown", "North York", "York", "East York", "Scraborough", "Etobicoke"].freeze
 
   JOB_STATUSES = {
     pending: "pending",

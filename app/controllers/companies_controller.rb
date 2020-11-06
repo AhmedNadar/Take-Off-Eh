@@ -8,7 +8,7 @@ class CompaniesController < ApplicationController
 
   def index
     # @companies = Company.with_attached_company_images
-    @companies = Company.with_attached_company_images.all
+    @companies = Company.limit(10)
     respond_with(@companies)
   end
 

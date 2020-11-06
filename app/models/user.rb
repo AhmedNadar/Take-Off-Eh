@@ -3,16 +3,23 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  card_brand             :string
+#  card_exp_month         :string
+#  card_exp_year          :string
+#  card_last4             :string
 #  email                  :string           default(""), not null, indexed
 #  encrypted_password     :string           default(""), not null
+#  expires_at             :datetime
 #  first_name             :string(255)
 #  last_name              :string(255)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string           indexed
 #  slug                   :string           indexed
+#  suggested_url          :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  stripe_id              :string
 #
 # Indexes
 #

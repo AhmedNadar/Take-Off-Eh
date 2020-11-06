@@ -13,6 +13,7 @@
 #  phone_number   :string
 #  slug           :string           indexed
 #  stage          :string
+#  suggested_url  :string
 #  website        :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -43,7 +44,7 @@ class Company < ApplicationRecord
 
   accepts_nested_attributes_for :team_members, allow_destroy: true, reject_if: proc { |attr| attr['title'].blank?}
 
-    # validatation
+  # validatation
   validates :name,          presence: true
   validates_length_of :name, maximum: 80,   allow_blank: false
   validates :details,       presence: true
