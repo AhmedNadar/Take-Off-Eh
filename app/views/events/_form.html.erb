@@ -1,0 +1,49 @@
+<div class="container flex flex-wrap items-center justify-center mx-auto">
+  <%= form_with(model: event, multipart: true, local: true, id: "new_event") do |form| %>
+    <% if event.errors.any? %>
+      <div id="error_explanation" class="p-6 mb-5 text-red-500 bg-white rounded">
+        <h2 class="font-bold text-red-500"><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+        <ul>
+          <% event.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-6">
+      <%= form.label :name, "Company Name", class: "label" %>
+      <%= form.text_field :name, class: "input", required: 'required', placeholder: "Event Name" %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :details, "Company info", class: "label" %>
+      <%= form.rich_text_area :details, class: "input", required: 'required', placeholder: "Add more details about this event." %>
+    </div>
+  
+    <div class="mb-6">
+      <%= form.label :date, "When your event would happen?", class: "label" %>
+      <%= form.datetime_field :date, order: [:day, :month, :year], class: "input", required: 'required' %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :location, "Event Location" , class: "label"  %>
+      <%= form.text_field :location, class: "input", required: 'required', placeholder: "Link to Application page or Email address" %>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-start lg:flex-no-wrap input-group">
+      <div class="w-full mb-6 lg:pr-4 lg:w-3/4 lg:mb-0">
+        <%= form.label :category, class: "label" %>
+        <div class="relative">
+          <%= form.select :category, Event::EVENT_CATEGORY,{}, { class: "select" } %>        
+        </div>
+      </div>
+    </div>  
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-green"%>
+    </div>
+    
+  <% end %>
+</div>

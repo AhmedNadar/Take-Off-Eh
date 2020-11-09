@@ -51,6 +51,7 @@ class User < ApplicationRecord
   has_one_attached  :picture
   has_many :companies, dependent: :destroy
   has_many :jobs, dependent: :destroy
+  has_many :events, dependent: :destroy
   has_many :team_members, dependent: :destroy
   
   # validation
@@ -60,25 +61,35 @@ class User < ApplicationRecord
   validates :email,       presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }  
   validates_format_of :email,:with => Devise::email_regexp
 
-    def admin?
-      has_role?(:admin)
-    end
+  def admin?
+    has_role?(:admin)
+  end
 
-    def client?
-      has_role?(:client)
-    end
+  def client?
+    has_role?(:client)
+  end
 
-    def slug_candidates
-      [:name, [:name, :last_name]]
-    end
+  def slug_candidates
+    [:name, [:name, :last_name]]
+  end
 
-    def should_generate_new_friendly_id?
-      if !slug?
-        email_changed?
-      else
-        false
-      end
+  def should_generate_new_friendly_id?
+    if !slug?
+      email_changed?
+    else
+      false
     end
+  end
+
+  #Returns user's upcoming events
+  def upcoming_events
+    events.where("date > ?", Time.now)
+  end
+
+  #Returns user's past events
+  def past_events
+    events.where("date < ?", Time.now)
+  end
 
   private     
     # def should_generate_new_friendly_id?

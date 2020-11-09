@@ -1,0 +1,39 @@
+
+
+  <% provide(:title, @event.name) %> 
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+        <p class="lead center">Created by: <%= link_to @event.user.name, @event.user %></p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @event.details %>
+</p>
+
+<p>
+  <strong>Date</strong>
+  <%= @event.date.strftime("%A, %B %e") if @event.date %>
+
+
+        <p class="lead center"><b>Time:</b> <%= @event.date.strftime("%I : %M %p") %><br>
+        <i class="fa fa-calendar"></i><b> Event Date: </b><%= @event.date.strftime("%A, %B %d %Y") %>        
+        </p>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @event.location %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @event.category %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

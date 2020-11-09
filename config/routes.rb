@@ -2,6 +2,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do  
+
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
@@ -32,10 +33,17 @@ Rails.application.routes.draw do
       get '/my_companies', to: 'companies#my_companies', as: :user
     end
   end
+  resources :events do
+    collection do
+      get '/my_events', to: 'events#my_events', as: :user
+    end
+  end
 
-  get 'my_companies' => 'companies#my_companies'
-  get 'my_jobs' => 'jobs#my_jobs'
-  get '/dashboard' => 'dashboard#index'
+
+  get 'my_companies'  => 'companies#my_companies'
+  get 'my_jobs'       => 'jobs#my_jobs'
+  get 'my_events'     => 'events#my_events'
+  get '/dashboard'    => 'dashboard#index'
   get '/dashboard/companies' => 'dashboard#companies'
 
 end

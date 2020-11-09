@@ -9,8 +9,7 @@
       <% @jobs.each do |job| %>
       <%= link_to job_path(job), class:"col-start-2 col-span-22 sm:col-span-1 bg-white", alt:" View #{job.title} job", title:"View #{job.title} job" do %>
         <div class="flex items-start h-32 sm:h-48">
-          <div class="relative w-full min-h-full p-4 border border-gray-200 rounded shadow-md">
-            
+          <div class="relative w-full min-h-full p-4 duration-500 ease-in-out transform border border-gray-200 rounded shadow-md hover:shadow-none">            
             <p class="flex flex-wrap items-center justify-start flex-inline">
               <%= image_tag job.company.company_logo.variant(resize: '34x34!'), class:"mr-3 rounded", alt:"#{job.company.name} logo" if job.company.company_logo.present? %>
               <span class="text-sm md:text-base font-heading"><%= truncate(strip_tags(job.company.name.to_s), length: 30) %></span>            
@@ -46,7 +45,7 @@
       <% end %>
     </div>
     <p class="max-w-xl mx-auto mt-8 mb-12 text-center">
-      <%= link_to "Explore sweet jobs opportunities", companies_path, class: "sm:text-lg md:text-xl text-indigo-500 underline font-bold transition duration-150 ease-in-out hover:text-pink-600" %>
+      <%= link_to "Explore sweet jobs opportunities", companies_path, class: "sm:text-lg md:text-xl text-gray-700 underline font-bold transition duration-150 ease-in-out hover:text-gray-900" %>
     </p>
   </div>
 </section>

@@ -3,9 +3,10 @@
     Welcome, <strong><%= (current_user.name || current_user.email) %>! </strong>
     <%#= image_tag gravatar_for(current_user) , alt: current_user.name, title: current_user.name, class: "h-8 w-8 rounded-full mx" %>
   </p> 
-  <%= link_to "New Company", new_company_path,          class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
-  <%= link_to "New Job", new_job_path,                  class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
-  <%= link_to "My companies", my_companies_path,        class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
+  <%#= link_to "New Company", new_company_path,          class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
+  <%#= link_to "New Job", new_job_path,                  class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
+  <%#= link_to "New Event", new_event_path,                  class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
+  <%#= link_to "My companies", my_companies_path,        class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
   <%= link_to "My Dashboard", dashboard_index_path,     class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black" %>
   <%= link_to "Settings", edit_user_registration_path,  class: "mr-4 font-medium text-gray-700 transition duration-150 ease-in-out hover:text-black"%>
     <% if :admin? %>
