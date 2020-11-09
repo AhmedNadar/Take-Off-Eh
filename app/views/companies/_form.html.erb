@@ -1,5 +1,5 @@
 <div class="container flex flex-wrap items-center justify-center mx-auto">
-  <%= form_with(model: company, multipart: true, local: true) do |form| %>
+  <%= form_with(model: company, multipart: true, local: true id: "new_company") do |form| %>
     <% if company.errors.any? %>
       <div id="error_explanation" class="p-6 mb-5 text-red-500 bg-white rounded">
         <h2 class="font-bold text-red-500"><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>

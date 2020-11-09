@@ -1,0 +1,28 @@
+<div class="flex flex-wrap items-center justify-center mx-auto">
+  <div class="w-full">
+        <section class="px-4 pt-8">
+              <%= image_tag @blog.image.variant(resize: '100%x100%').processed, class: "mx-auto", alt: @blog.title if @blog.image.attached?  %>
+        </section>
+    <div class="container relative p-6 mx-auto text-gray-900 bg-white rounded-lg lg:p-10" id=<%= blog_path(@blog.id) %>>
+      <div class="flex flex-wrap items-center justify-between w-full pb-4 mb-8">
+        <div class="flex-1">
+          <h1 class="text-3xl font-bold leading-none text-gray-800"><%= @blog.title %></h1>
+          <p class="text-sm font-semibold text-gray-500 uppercase">Category: <%= @blog.category %></p> 
+          <p class="text-sm italic text-gray-500">Created by <%= @blog.user.name ||= @blog.user.username %></p>           
+        </div>
+
+        <div id="photos" class="flex flex-wrap items-start justify-between w-full mb-6">      
+          <div class="w-full mt-6 lg:pr-10 lg:mt-0">
+            <div class="mb-6">
+              <%= @blog.content %>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_blog_path(@blog) %> |
+<%= link_to 'Back', blogs_path %>

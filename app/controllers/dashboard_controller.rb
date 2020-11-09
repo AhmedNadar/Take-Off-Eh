@@ -9,6 +9,7 @@ class DashboardController < ApplicationController
     @my_companies  = current_user.companies
     @my_jobs       = current_user.jobs
     @my_events       = current_user.events
+    @my_blogs       = current_user.blogs
     respond_with(@companies, @jobs)
   end
 
@@ -21,4 +22,7 @@ class DashboardController < ApplicationController
   def my_events
     @events  = current_user.events 
   end
+  def my_blogs
+    @blogs  = current_user.blogs 
+  end  
 end

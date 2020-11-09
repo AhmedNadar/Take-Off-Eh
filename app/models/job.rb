@@ -40,9 +40,9 @@ class Job < ApplicationRecord
   friendly_id :slug_candidates, use: [:slugged, :finders]
 
   #association
-  belongs_to        :company
-  belongs_to        :user
-  has_rich_text     :description
+  belongs_to :company
+  belongs_to :user
+  has_rich_text :description
   
   #validation
   validates :title,
@@ -66,9 +66,9 @@ class Job < ApplicationRecord
 
   JOB_TYPES = ["Full-time", "Part-time", "Contract", "Freelance"].freeze
 
-  JOB_CATEGORY = ["Design", "Programming", "Customer Support", "Copywriting", "DevOps and Sysadmin", "Sales and Marketing", "Business, Management and Finance", "Product", "Other Category"].freeze
+  JOB_CATEGORY = ["Design", "Programming", "Customer Support", "Copywriting", "DevOps & Sysadmin", "Sales & Marketing", "Business, Management & Finance", "Product", "Other Category"].freeze
   
-  JOB_REGION = ["100% Remote", "DownTown", "North York", "York", "East York", "Scraborough", "Etobicoke"].freeze
+  JOB_REGION = ["Remote", "DownTown", "North York", "York", "East York", "Scraborough", "Etobicoke"].freeze
 
   JOB_STATUSES = {
     pending: "pending",

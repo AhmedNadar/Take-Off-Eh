@@ -1,0 +1,48 @@
+
+<div class="container flex flex-wrap items-center justify-center mx-auto">
+  <%= form_with(model: blog, local: true, multipart: true, id: "new_blog") do |form| %>
+    <% if blog.errors.any? %>
+      <div id="error_explanation" class="p-6 mb-5 text-red-500 bg-white rounded">
+        <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+        <ul>
+          <% blog.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+  <div class="mb-6">
+    <%= form.label :image, "Blog header image" , class: "label" %>
+    <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="10">
+    <%= form.file_field :image, multiple: false, direct_upload: true, class: 'form-input py-10', accept: 'image/png, image/jpeg, image/gif, image/tiff', size_limit: 5_000_000, data: { target: 'dropzone.input' } %>
+    <div class="text-gray-600 dropzone-msg dz-message needsclick">
+      <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>
+      <span class="text-sm dropzone-msg-desc">2 MB file size maximum. Allowed file types png, jpg.</span>
+      </div>
+    </div>
+  </div>
+
+    <div class="mb-6">
+      <%= form.label :title, "Blog tile" , class: "label"  %>
+      <%= form.text_field :title, class: "input", required: 'required', placeholder: "Blog Title" %>
+    </div>
+
+
+    <div class="mb-6">
+      <%= form.label :content, "Blog content" , class: "label"  %>
+      <%= form.rich_text_area :content, class: "input", required: 'required', placeholder: "Blog Description" %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :category, "Blog Category"  , class: "label" %>
+      <%= form.select :category, Blog::BLOG_CATEGORY,{}, { class: "select" } %>
+    </div>
+
+
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-green"%>
+    </div>
+  <% end %>
