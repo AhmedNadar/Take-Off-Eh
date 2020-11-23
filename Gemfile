@@ -72,5 +72,6 @@ gem 'awesome_print', '~> 1.8.0'
 gem 'kaminari', '~> 1.2.1'
 gem 'will_paginate', '~> 3.1.0'
 gem 'ipinfo-rails', '~> 0.1.1'
+gem 'rails-i18n'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

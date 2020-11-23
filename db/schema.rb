@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_102304) do
+ActiveRecord::Schema.define(version: 2020_11_14_185320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2020_10_06_102304) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.string "category"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_blogs_on_user_id"
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -58,12 +67,26 @@ ActiveRecord::Schema.define(version: 2020_10_06_102304) do
     t.string "suggested_url"
     t.string "headquarter"
     t.integer "company_size"
-    t.string "phone_number"
     t.string "business_model"
     t.string "stage"
-    t.string "industry"
     t.index ["slug"], name: "index_companies_on_slug", unique: true
     t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
+  create_table "companies_industries", id: false, force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "industry_id", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.string "category"
+    t.datetime "date"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -75,6 +98,12 @@ ActiveRecord::Schema.define(version: 2020_10_06_102304) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "industries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -120,6 +149,7 @@ ActiveRecord::Schema.define(version: 2020_10_06_102304) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "note"
     t.index ["company_id"], name: "index_team_members_on_company_id"
   end
 
@@ -165,7 +195,9 @@ ActiveRecord::Schema.define(version: 2020_10_06_102304) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "blogs", "users"
   add_foreign_key "companies", "users"
+  add_foreign_key "events", "users"
   add_foreign_key "jobs", "companies"
   add_foreign_key "jobs", "users"
   add_foreign_key "team_members", "companies"

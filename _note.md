@@ -189,3 +189,14 @@
 
 #### TeamMemberModel
 - user_id, company_id, email, first_name, last_name, profile_link, title, 
+
+
+
+
+
+- Custom Date And Time Formats In Rails
+- https://thoughtbot.com/blog/custom-date-and-time-formats-in-rails
+
+
+Making a Rails 6 app in 2020
+https://dev.to/majov84382672/making-a-rails-6-app-in-2020-3fng
