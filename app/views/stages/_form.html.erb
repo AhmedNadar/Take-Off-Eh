@@ -1,0 +1,25 @@
+<div class="mx-auto">
+  <%= form_with(model: stage, local: true) do |form| %>
+    <% if stage.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(stage.errors.count, "error") %> prohibited this stage from being saved:</h2>
+
+        <ul>
+          <% stage.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+    <div class="mb-6">
+      <%= form.label :name, "Stage Name" , class: "label"  %>
+      <%= form.text_field :name, class: "input", required: 'required', placeholder: "Type new stage name?" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-green"%>
+    </div>
+  <% end %>
+

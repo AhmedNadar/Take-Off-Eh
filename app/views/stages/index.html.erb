@@ -1,0 +1,108 @@
+<div class="py-12 bg-white">
+  <div class="max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
+    <p id="notice"><%= notice %></p>
+    <h3 class="mt-2 mb-10 text-3xl font-extrabold leading-8 text-gray-800 sm:text-3xl sm:leading-10">
+      Stages
+      <br class="xl:hidden">
+      <span class="text-indigo-600"> in use..</span>
+    </h3>
+    <p class="mt-2 mb-6 text-lg leading-7 text-gray-700">
+      Here are all stages that have been created for companies. Currntly we have <strong><%= @stages.count%> stages</strong>.
+    </p> 
+    <div class="flex flex-col">
+      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
+                    ID
+                  </th>
+                  <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
+                    Name
+                  </th>
+                  <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
+                    Companies count
+                  </th>
+                  <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
+                    Created Date
+                  </th>
+                  <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
+                      active
+                    </th>  
+                  <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
+                      not admin
+                    </th>  
+                  <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
+                    admin
+                  </th>                                                                     
+                  <th class="px-6 py-3 bg-gray-50"></th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <% @stages.each do |stage| %>
+                <tr class="transition duration-150 ease-in-out cursor-pointer hover:bg-orange-200 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 hover:bg-gray-50" >
+                  <td class="px-6 py-4 whitespace-no-wrap">
+                    <%= link_to stage_path(stage) do%>
+                      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                        <div class="text-sm leading-5 text-gray-900"><%= stage.id %></div>
+                      </span>
+                    <% end %>
+                  </td>                   
+                  <td class="whitespace-no-wrap">
+                    <%= link_to stage_path(stage) do%>
+                      <div class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 ">
+                        <span><%= stage.name.titleize %></span>
+                      </div>
+                    <% end %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-no-wrap">
+                    <%= link_to stage_path(stage) do%>
+                      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-indigo-700 bg-purple-200 rounded-full">
+                        <div class="text-sm leading-5 text-gray-900"><%= stage.companies.count %></div>
+                      </span>
+                    <% end %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-no-wrap">
+                    <%= link_to stage_path(stage) do%>
+                      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-indigo-700 bg-purple-200 rounded-full">
+                        <div class="text-sm leading-5 text-gray-900"><%= stage.created_at.strftime("%b %d, %I:%M%P") %></div>
+                      </span>
+                    <% end %>
+                  </td>
+
+                  <td class="px-6 py-4 whitespace-no-wrap">
+                    <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                      Active
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
+                    Admin
+                  </td>
+                  <% if can? :manage, stage %>
+                    <td class="justify-start px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap ">                    
+                      <%= link_to 'Edit', edit_stage_path(stage), class:"text-green-600 hover:text-green-900 " %>                                    
+                    </td>                  
+                    <td class="justify-start px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap ">                     
+                      <%= link_to 'Destroy', stage, method: :delete, data: { confirm: 'Are you sure?' },  class:"text-red-600 hover:text-red-900 " %>
+                    </td>
+                  <% end %>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>        
+        </div>
+        <span class="rounded-md shadow-sm sm:ml-3">
+          <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-pink-600 border border-transparent rounded-md hover:bg-pink-500 focus:outline-none focus:shadow-outline-pink focus:border-pink-700 active:bg-pink-700">
+            <svg class="w-5 h-5 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>          
+            <%= link_to 'New stage', new_stage_path %>
+          </button>
+        </span>        
+      </div>
+    </div>
+  </div>
+</div>

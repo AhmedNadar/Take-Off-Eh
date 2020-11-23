@@ -1,5 +1,5 @@
 <div class="container flex flex-wrap items-center justify-center mx-auto">
-  <%= form_with(model: event, multipart: true, local: true, id: "new_event") do |form| %>
+  <%= form_with(model: event, multipart: true, local: true, id:"new_event") do |form| %>
     <% if event.errors.any? %>
       <div id="error_explanation" class="p-6 mb-5 text-red-500 bg-white rounded">
         <h2 class="font-bold text-red-500"><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
