@@ -7,9 +7,10 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require("trix")
+// require("trix")
 require("@rails/actiontext")
 require("local-time").start()
+require("../utils/trix")
 
 import "controllers" // imports all files with controllers folder and run inde
 import "stylesheets/application"

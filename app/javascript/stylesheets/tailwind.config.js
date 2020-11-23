@@ -55,6 +55,7 @@ module.exports = {
         700: '#c05621',
         800: '#9c4221',
         900: '#7b341e',
+        bit: '#efebe9',
       },
       yellow: {
         100: '#fffff0',
@@ -358,6 +359,7 @@ module.exports = {
     }),
     minHeight: {
       '0': '0',
+      blog: '17.6rem',
       card: '20rem',
       full: '100%',
       screen: '100vh',
@@ -460,6 +462,7 @@ module.exports = {
       '40': '40',
       '50': '50',
       '100': '100',
+      '110': '110',
     },
     gap: theme => theme('spacing'),
     gridTemplateColumns: {
@@ -820,7 +823,7 @@ module.exports = {
     space: ['responsive'],
     stroke: ['responsive'],
     strokeWidth: ['responsive'],
-    tableLayout: ['responsive'],
+    tableLayout: ['responsive', 'hover', 'focus'],
     textAlign: ['responsive'],
     textColor: ['responsive', 'hover', 'focus'],
     textOpacity: ['responsive', 'hover', 'focus'],

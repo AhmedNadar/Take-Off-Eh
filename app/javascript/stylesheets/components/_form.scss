@@ -3,11 +3,11 @@
 @import "dropzone/dist/min/basic.min.css";
 
 .input {
-  @apply appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight;
+  @apply appearance-none block w-full bg-gray-100 text-gray-900 border border-gray-300 rounded py-3 px-4 leading-tight;
 }
 
 .input:focus {
-  @apply outline-none bg-white border-gray-400;
+  @apply outline-none bg-white border-gray-300;
 }
 
 .label {
@@ -63,33 +63,45 @@
 // }
 
 
-    .abs_bg {
-      
-      background-image: url("/assets/3ed_section_bg.png");
-      background-color: rgb(255, 247, 236);
-      background-position: bottom;
-      background-size: cover;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      
-    }
-    .abs_bg::before {
-      content: "";
-      top: 0px;
-      right: 0px;
-      bottom: 0px;
-      left: 0px;      
-      opacity: .6;
-    }
-    
-    .home_top_bg {
-      background-color: rgb(255, 255, 255);
-      background-image: url("/assets/home_header_bg.png");    
-    }
-    
+.abs_bg {      
+  background-image: url("/assets/3ed_section_bg.png");
+  background-color: rgb(255, 247, 236);
+  background-position: bottom;
+  background-size: cover;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.abs_bg::before {
+  content: "";
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;      
+  opacity: .6;
+}
 
-
-
+.home_top_bg {
+  background-color: rgb(255, 255, 255);
+  background-image: url("/assets/home_header_bg.png");    
+}
     
+.hr {
+  border-width: 0 0 2px;
+  --border-opacity: 1;
+  border-color: #efebe9;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.hr-01 {
+  border-width: 0 0 2px;
+  --border-opacity: 1;
+  border-color: #efebe9;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  width: 100%;
+}
