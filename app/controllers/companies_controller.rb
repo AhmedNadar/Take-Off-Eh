@@ -25,7 +25,6 @@ class CompaniesController < ApplicationController
   end
 
   def edit
-  
   end
 
   def create
@@ -58,9 +57,8 @@ class CompaniesController < ApplicationController
 
     def company_params
       params.require(:company).permit(
-        :name, :details, :email, :website, :found_date, :slug, :business_model,
-        :headquarter, :company_size, :company_logo, :phone_number, :stage, :industry,
-        company_images:[],
-        team_members_attributes: [:_destroy, :id, :title, :first_name, :last_name, :email, :profile_link, :member_photo])
+        :name, :details, :email, :website, :found_date, :slug, :headquarter, :business_model, :company_statement,
+        :company_size, :company_logo, :stage, industry_ids:[], company_images:[], 
+        team_members_attributes: [:_destroy, :id, :title, :first_name, :last_name, :email, :profile_link, :member_photo, :note] )
     end
 end

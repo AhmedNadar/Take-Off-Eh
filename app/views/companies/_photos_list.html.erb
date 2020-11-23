@@ -1,16 +1,21 @@
+<section class="px-4 py-8">
+  <div class="flex flex-wrap -mx-4">    
+    <% (@company.company_images).each do |image| %>
+      <div class="px-4 mb-8 md:w-1/2 md:mb-0">
+        <%= image_tag image.variant(:gravity=>"Center", resize: "600x400^", crop: '600x400+0+0'), class:"rounded shadow-md mx-auto", alt:"#{@company.name}"  if image %>
+      </div>
+    <% end %>
+  </div>
+</section>
 
-            <%# (0...@company.company_images.count).each do |image| %>
-            <%# (@company.company_images).each do |image| %>
-              <%#= image_tag(@company.company_images[image], class: "rounded-lg md:w-90") %>
-              <%#= image_tag(@company.thumbnail(image), class: "rounded-lg") %>            
-              <%#= image_tag image %>
-            <%# end %>
 
-        <section class="px-4 pt-8">
-          <div class="flex flex-wrap -mx-4">
-            <% (@company.company_images).each do |image| %>
-              <div class="px-4 mb-8 md:w-1/2"><%= image_tag image, class:"rounded shadow-md", alt:"#{@company.name}" %></div>              
-            <% end %>
-          </div>
-        </section>
+<%# (0...@company.company_images.count).each do |image| %>
+<%# (@company.company_images).each do |image| %>
+  <%#= image_tag(@company.company_images[image], class: "rounded-lg md:w-90") %>
+  <%#= image_tag(@company.thumbnail(image), class: "rounded-lg") %>            
+  <%#= image_tag image %>
+<%# end %>
 
+
+
+<%#= image_tag @blog.image.variant(:gravity=>"Center", resize: "1440x600^", crop: '1440x600+0+0'), class: "mx-auto", alt: @blog.title if @blog.image.attached? %>

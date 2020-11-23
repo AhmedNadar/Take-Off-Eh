@@ -1,5 +1,5 @@
-<div class="container flex flex-wrap items-center justify-center mx-auto">
-  <%= form_with(model: company, multipart: true, local: true id: "new_company") do |form| %>
+<div class="mx-auto">
+  <%= form_with(model: company, multipart: true, local: true, id:"new_company") do |form| %>
     <% if company.errors.any? %>
       <div id="error_explanation" class="p-6 mb-5 text-red-500 bg-white rounded">
         <h2 class="font-bold text-red-500"><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
@@ -12,140 +12,140 @@
       </div>
     <% end %>
     
-    <%
-=begin%>
- <div class="mb-6">
-      <%= form.label :company_logo, "Comapny thumbnail", class: "label" %>
-      <%= form.file_field :company_logo %>
-    </div> 
-<%
-=end%>
-
-  <div class="mb-6">
-    <%= form.label :company_logo, "Company Logo " , class: "label" %>
-    <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1">
-    <%= form.file_field :company_logo, direct_upload: true, class: 'form-input py-10', accept: 'image/png, image/jpeg, image/gif, image/tiff', size_limit: 5_000_000, data: { target: 'dropzone.input' } %>
-    <div class="text-gray-600 dropzone-msg dz-message needsclick">
-      <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>
-      <span class="text-sm dropzone-msg-desc">2 MB file size maximum. Allowed file types png, jpg.</span>
+    <div class="grid sm:gap-4 sm:mx-2 grid-cols-24 sm:gap-y-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4">
+      <!-- comany name -->
+      <div class="col-span-4 row-span-1 mt-2 mb-4">
+        <%= form.label :name, "Company Name", class: "text-base font-semibold leading-5 text-gray-900 mb-2 inline-block" %>
+        <%= render "required_icon" %>
+        <%= form.text_field :name, class: "input", required: 'required' %> 
+        <p class="mt-2 text-sm text-gray-600">
+          Example: “Urban Cottage”. Enter your company or organization’s name.
+        </p>
       </div>
-    </div>
-  </div>
 
-
-
-  <div class="mb-6">
-    <%= form.label :company_images, "Company Image Gallery " , class: "label" %>
-    <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="10">
-    <%= form.file_field :company_images, multiple: true, direct_upload: true, class: 'form-input py-10', accept: 'image/png, image/jpeg, image/gif, image/tiff', size_limit: 5_000_000, data: { target: 'dropzone.input' } %>
-    <div class="text-gray-600 dropzone-msg dz-message needsclick">
-      <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>
-      <span class="text-sm dropzone-msg-desc">2 MB file size maximum. Allowed file types png, jpg.</span>
+      <!-- comany logo -->
+      <div class="flex row-span-1 mb-4 text-center">
+        <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1">
+          <%= form.file_field :company_logo, direct_upload: true, class: 'form-input py-10', accept: 'image/png, image/jpeg, image/gif, image/tiff', size_limit: 2_000_000, data: { target: 'dropzone.input' } %>
+          <div class="text-gray-600 dropzone-msg dz-message needsclick ">
+            <h3 class="text-base font-bold dropzone-msg-title">Drag or click to upload your Company logo</h3>
+            <span class="text-xs dropzone-msg-desc">
+              Choose a square image with a solid background color of at least 100x100px. 
+              <br/>2 MB file size maximum.
+              <%= render "required_icon" %>
+            </span>
+            <% if company.company_logo.attached? %>
+              <%= image_tag(company.logo_resize, class: "rounded-full h-20 w-20 mx-auto mt-2") %>
+            <% end %>
+          </div>          
+        </div>        
       </div>
-    </div>
-  </div>
 
+      <!-- company_statement -->
+      <div class="col-span-3 row-span-1 mt-2 mb-4">
+        <%= form.label :company_statement, "Company Statement", class: "text-base font-semibold leading-5 text-gray-900 mb-2 inline-block" %>
+        <%= render "required_icon" %>
+        <%= form.rich_text_area :company_statement, class: "input w-full", required: 'required'%> 
+        <p class="mt-2 text-sm text-gray-600">
+          Enter your company or organization’s mission statement. This will be displayed on your company’s profile. Check these <a class="text-indigo-500 underline hover:no-underline" href="https://topnonprofits.com/examples/nonprofit-mission-statements/" target="_blank"> Mission Statements Examples.</a>
+        </p>
+      </div>
 
-    <%
-=begin%>
- <div class="mb-6">
-      <%= form.label :company_images, "Comapny Images", class: "label" %>
-      <%= form.file_field :company_images, multiple: true, direct_upload: true, class: 'form-input py-10', accept: 'image/png, image/jpeg, image/gif, image/tiff', size_limit: 5_000_000 %>
-
-    </div> 
-<%
-=end%>
-
-    <div class="mb-6">
-      <%= form.label :name, "Company Name", class: "label" %>
-      <%= form.text_field :name, class: "input", required: 'required', placeholder: "Company Name" %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :details, "Company info", class: "label" %>
-      <%= form.rich_text_area :details, class: "input", required: 'required', placeholder: "Enter your company or organization’s mission statement. This will be displayed on your company’s profile." %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :email, "Email", class: "label" %>
-      <%= form.text_field :email, class: "input", required: 'required', placeholder: "We’ll send your receipt and confirmation email here." %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :website, "Company's Website URL", class: "label" %>
-      <%= form.text_field :website, class: "input", required: 'required', placeholder: "Example: https://mybusiness.com/" %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :headquarter, "Company's headquarter ", class: "label" %>
-      <%= form.text_field :headquarter, class: "input", placeholder: "Example: Toronto, Canada" %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :company_size, "Company's team size ", class: "label" %>
-      <%= form.text_field :company_size, class: "input", placeholder: "Example: 10 -20" %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :phone_number, "Company's phone_number ", class: "label" %>
-      <%= form.text_field :phone_number, class: "input", placeholder: "Example: 00-01-647-2345" %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :business_model, "Company's business_model ", class: "label" %>
-      <%= form.text_field :business_model, class: "input", placeholder: "Choose one of: B2C, B2B, Marketplace or B2G" %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :stage, "Company's stage ", class: "label" %>
-      <%= form.text_field :stage, class: "input", placeholder: "Example:Idea, Product or prototype, Go to Market, Growth and expancion" %>
-    </div>  
-
-    <div class="mb-6">
-      <%= form.label :industry, "Company's industry ", class: "label" %>
-      <%= form.text_field :industry, class: "input", placeholder: "Example:Idea, Advertising, IT, Gaming, ..." %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :found_date, "Founded Date", class: "label" %>
-      <%= form.text_field :found_date, class: "input", placeholder: "When your company was founded" %>
-    </div>
-
-
-
-          <div class="mb-6">
-
-
-            <div class="row team_members-body">
-              <h3 class="mt-2 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
-                Team Member photo
-              </h3>
-              <p><i>List your team of bulletproof talent to attract future co-workers and investors e.g. Founder(s), C-suite and key staff</i></p>
-              
-          
-              <div data-controller="nested-form">
-                
-                <template data-target='nested-form.template'>
-                  <%= form.fields_for :team_members,  TeamMember.new, child_index: 'TEMPLATE_RECORD' do |member| %>
-                    <%= render 'team_member_fields', form: member %>
-                  <% end %>
-                </template>
-                  
-                  
-                  <%= form.fields_for :team_members do |member| %>
-                    <%= render 'team_member_fields', form: member %>
-                  <% end %>
-                  
-                  <div data-target="nested-form.add_item">
-                  <%= link_to  "Add member", "#", data: { action: "nested-form#add_association" } %>            
-                  </div>
-
-              <div>
-            </div>
+      <!-- comany images -->
+      <div class="col-span-4 row-span-2 mb-4">
+        <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="6">
+        <%= form.file_field :company_images, multiple: true, direct_upload: true, class: 'form-input py-10', accept: 'image/png, image/jpeg, image/gif, image/tiff', size_limit: 2_000_000, data: { target: 'dropzone.input' } %>
+        <div class="text-gray-600 dropzone-msg dz-message needsclick">
+          <h3 class="text-base font-bold dropzone-msg-title">Drag or click to upload your Company gallery</h3>
+          <span class="text-sm dropzone-msg-desc">
+            2 MB file size maximum.<br/>
+            Stand out with quality images of at least 700x700px (Maximum 6 photos)         
+          </span>
           </div>
+        </div>
+      </div>
+      <!-- basic title -->
+      <div class="col-span-4 row-span-4">
+        <div class="mt-10 mb-8">
+          <h3 class="text-2xl font-bold leading-8 text-indigo-700 sm:text-3xl sm:leading-10">Brilliant basics</h3>
+            <span class="text-base text-gray-600">Get the basics right and you are off to a better start</span>      
+        </div>
+      </div>
+      <!-- comany details -->
+      <div class="col-span-4 row-span-1 mt-2 mb-4">
+        <%= form.label :details, "Company details", class: "text-base font-semibold leading-5 text-gray-900 mb-2 inline-block" %>
+        <%= render "required_icon" %>
+        <%= form.rich_text_area :details, class: "input w-full", required: 'required'%> 
+        <p class="mt-2 text-sm text-gray-600">
+          Tell Us More About Your Company/startup, what problem you are solving and why.
+        </p>
+      </div>
 
-    <div class="mb-6">
-      <%= form.submit class: "btn btn-default" %>
+      <!-- comany email -->
+      <div class="col-span-2 row-span-1 mb-4">
+        <%= form.label :email, "Company email", class: "text-base font-semibold leading-5 text-gray-900 mb-2 inline-block" %>
+        <%= render "required_icon" %>
+        <%= form.text_field :email, class: "input" %>
+        <p class="mt-2 text-sm text-gray-600">
+          This email is public, although it is not required, it increases compay trust with prospocet.
+        </p>            
+      </div>
+
+      <!-- comany website -->
+      <div class="col-span-2 row-span-1 mb-4">
+        <%= form.label :website, "Company's Website URL", class: "text-base font-semibold leading-5 text-gray-900 mb-2 inline-block" %>
+        <%= render "required_icon" %>
+        <%= form.text_field :website, class: "input", required: 'required' %>
+        <p class="mt-2 text-sm text-gray-600">
+          Example: urbancottage.net
+        </p>            
+      </div>
+          
+      <!-- comany founded -->
+      <div class="col-span-1 row-span-1 mb-4">
+        <%= form.label :found_date, "Founded", class: "text-base font-semibold leading-5 text-gray-900 mb-2 inline-block" %>
+        <%= render "required_icon" %>       
+        <%= form.text_field :found_date, class: "input", required: 'required' %>
+        <p class="mt-2 text-sm text-gray-600">
+          The year your company was founded. Example: 1999, 2015 ...
+        </p>            
+      </div>
+
+      <!-- comany HQ -->
+      <div class="col-span-2 row-span-1 mb-4">
+        <%= form.label :headquarter, "Company headquarter", class: "text-base font-semibold leading-5 text-gray-900 mb-2 inline-block" %>
+        <%= render "required_icon" %>       
+        <%= form.text_field :headquarter, class: "input", required: 'required' %>
+        <p class="mt-2 text-sm text-gray-600">
+          Example: "Toronto, Canada", "Cairo, Egypt"
+        </p>            
+      </div> 
+
+      <!-- comany team size -->
+      <div class="col-span-1 row-span-1 mb-4">
+        <%= form.label :company_size, "Number of employees", class: "text-base font-semibold leading-5 text-gray-900 mb-2 inline-block" %>
+        <%= render "required_icon" %>        
+        <%= form.text_field :company_size, class: "input", required: 'required' %>
+        <p class="mt-2 text-sm text-gray-600">
+          Total number of all employees. Example: 100, 13, 1 
+        </p>            
+      </div>           
+      
+      <!-- company industries -->
+      <%= render "industries_list", form: form %>
+      <!-- company stages list -->
+      <%= render "stages_list", form: form %>
+      <!-- company business model -->
+      <%= render "business_model", form: form %>
+
     </div>
-  <% end %>
-</div>
+<hr class="hr">
+    <%= render "team_members", form: form %>
+
+      <div class="mb-6">
+        <%= form.submit class: "btn btn-default" %>
+      </div>
+    <% end %>
+  </div>
+
+

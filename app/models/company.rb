@@ -8,9 +8,7 @@
 #  email          :string
 #  found_date     :string
 #  headquarter    :string
-#  industry       :string
 #  name           :string
-#  phone_number   :string
 #  slug           :string           indexed
 #  stage          :string
 #  suggested_url  :string
@@ -37,6 +35,8 @@ class Company < ApplicationRecord
 
   belongs_to :user
   has_rich_text :details
+  has_rich_text :company_statement
+  has_and_belongs_to_many :industries
   has_one_attached :company_logo, dependent: :destroy
   has_many_attached :company_images, dependent: :destroy
   has_many :team_members, dependent: :destroy, inverse_of: :company
@@ -51,12 +51,23 @@ class Company < ApplicationRecord
   validates :email,         presence: true
   validates :website,       presence: true
   validates :found_date,    presence: true
-  # validates :company_logo,  presence: true
-  # validates :company_images,  presence: true
+  validates :company_size,  presence: true
+  validates :headquarter,   presence: true
+  validates :company_statement,   presence: true
+  # validates :industries,    presence: true
+  validates :stage,         presence: true
+  validates :company_logo,  presence: true
   validate :company_logo_format
-  validate :image_type
   validates_associated :team_members
+  # validates :company_images,  presence: true
+  # validate :image_type
   
+  STAGES = ["Idea", "Product or prototype", "Go to market", "Growth and expansion"].freeze
+  validates :stage, inclusion: STAGES
+
+  BUSINESS_MODEL = ["Business to Business (B2B)", "Business to Consumer (B2C)", "Marketplace", "Business-to-Government (B2G)"].freeze
+  validates :business_model, inclusion: BUSINESS_MODEL
+
   # Note that implicit association has a plural form in this case
   scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
 
@@ -76,6 +87,7 @@ class Company < ApplicationRecord
   def should_generate_new_friendly_id?
     slug.blank? || name_changed?
   end
+
   
   private
 
@@ -96,5 +108,5 @@ class Company < ApplicationRecord
         end
       end
     end
-
+    
 end

@@ -1,0 +1,60 @@
+
+<div class="col-span-4 row-span-4">
+  <div class="mt-10 mb-8">
+    <h3 class="text-2xl font-bold leading-8 text-indigo-700 sm:text-3xl sm:leading-10">Select your primary Business Model
+      <svg class="inline-block w-3 h-3 ml-1 text-red-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+      </svg>    
+    </h3>
+      <span class="text-base text-gray-600">Describe how your business makes money. How you deliver value to your customers at an appropriate cost.</span>
+  </div>
+  <div class="md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-4">
+    <div class="flex items-center">
+      <div class="relative w-full mb-6 lg:mb-0">
+        <%= form.select :business_model, Company::BUSINESS_MODEL,{}, { class: "select" } %> 
+        <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-4 h-4 fill-current"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg></div>
+      </div>    
+    </div>
+  </div>
+  <!-- biz models details -->
+  <div class="mt-10 space-y-6 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-6">
+    <div class="flex items-start">
+      <div class="ml-1">
+        <h4 class="text-lg font-medium leading-6 text-gray-900">Business to Business (B2B)</h4>
+        <p class="max-w-xl mt-1 text-base text-gray-500 lg:mt-2">
+          B2B Gateway is a part of a business IT architecture that connects internal resources to external ones. In general, a B2B Gateway links up in-house software processes to e-commerce platforms, or platforms featuring collaboration with partners or vendors.
+        </p>
+      </div>
+    </div>
+    <div class="flex items-start">
+      <div class="ml-1">
+      <h4 class="text-lg font-medium leading-6 text-gray-900">Business to Consumer (B2C)</h4>
+        <p class="max-w-xl mt-1 text-base text-gray-500 lg:mt-2">
+          B2C is an Internet and electronic commerce (e-commerce) model that denotes a financial transaction or online sale between a business and consumer. B2C involves a service or product exchange from a business to a consumer, whereby merchants sell products to consumers. B2C is also known as business-to-customer 
+        </p>
+      </div>
+    </div>
+    <div class="flex items-start">
+      <div class="ml-1">
+      <h4 class="text-lg font-medium leading-6 text-gray-900">Marketplace</h4>
+        <p class="max-w-xl mt-1 text-base text-gray-500 lg:mt-2">
+          Online marketplaces connect buyers and sellers on a proprietary platform. Oftentimes, the marketplace operator does not hold any type of inventory, but helps the buyers and sellers to facilitate a transaction.
+        </p>
+      </div>
+    </div>
+    <div class="flex items-start">
+
+      <div class="ml-1"> 
+      <h4 class="text-lg font-medium leading-6 text-gray-900">Business to Government (B2G)</h4>         
+        <p class="max-w-xl mt-1 text-base text-gray-500 lg:mt-2">
+          B2G is a business model that refers to businesses selling products, services or information to governments or government agencies.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <%#= form.check_box :business_model, Company::BUSINESS_MODEL %>
+    <%#= form.check_box :business_model, Company::BUSINESS_MODEL, {:multiple => true} %>
+    <%#= form.collection_check_boxes :industry_ids, Industry.all, :id, :name do |indusrty| %>

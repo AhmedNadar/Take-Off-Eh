@@ -1,0 +1,58 @@
+<!-- company Brilliant Basics -->
+<section class="grid w-full grid-cols-1 gap-4 p-4 mb-8 border-2 rounded-lg justify-items-auto" style="border-color: #efebe9;">
+  <div class="flex flex-wrap w-full">
+    <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+    </svg>
+    <h2 class="text-lg font-semibold">Get to know us</h2>
+  </div>
+  <hr class="hr-01">
+  <% if @company.website.present? %>
+    <div class="flex flex-wrap w-full">
+      <span class="w-full text-xs text-gray-500 flex-inline sm:text-sm">Website</span>
+      <p class="w-full text-base font-medium text-indigo-600 underline flex-inline hover:no-underline"><%=link_to "http://" + @company.website, "http://#{@company.website}", target: '_blank' %></p>
+    </div>
+  <%end%>                
+  <% if @company.email.present? %>
+    <div class="flex flex-wrap w-full">
+      <span class="w-full text-xs text-gray-500 flex-inline sm:text-sm">Email</span>
+      <p class="w-full text-base font-medium text-indigo-600 underline flex-inline hover:no-underline"><%=mail_to @company.email, @company.email, subject: "Hi from Built In Toronto"%></p>
+    </div>
+  <%end%>  
+  <% if @company.found_date.present? %>
+    <div class="flex flex-wrap">
+      <span class="w-full text-xs text-gray-500 flex-inline sm:text-sm">Founded</span>
+      <p class="w-full text-base font-medium flex-inline"><%= @company.found_date %></p>
+    </div>
+  <%end%>
+  <% if @company.headquarter.present? %>
+    <div class="flex flex-wrap">
+      <span class="w-full text-xs text-gray-500 flex-inline sm:text-sm">Headquarter</span>
+      <p class="w-full text-base font-medium flex-inline"><%= @company.headquarter %></p>
+    </div>
+  <%end%>
+  <% if @company.company_size.present? %>
+    <div class="flex flex-wrap">
+      <span class="w-full text-xs text-gray-500 flex-inline sm:text-sm">Employees</span>
+      <p class="w-full text-base font-medium flex-inline"><%= @company.company_size %></p>
+    </div>
+  <% end %> 
+  <% if @company.stage.present? %>
+    <div class="flex flex-wrap">
+      <span class="w-full text-xs text-gray-500 flex-inline sm:text-sm">Stage</span>
+      <p class="w-full text-base font-medium flex-inline"><%= @company.stage %></p>
+    </div>
+  <% end %>  
+  <% if @company.business_model.present? %>
+    <div class="flex flex-wrap">
+      <span class="w-full text-xs text-gray-500 flex-inline sm:text-sm">Business Model</span>
+      <p class="w-full text-base font-medium flex-inline"><%= @company.business_model %></p>
+    </div>
+  <% end %>
+  <% if @company.industries.present? %>
+    <div class="flex flex-wrap">
+      <span class="w-full text-xs text-gray-500 flex-inline sm:text-sm">Industries</span>
+      <p class="w-full text-base font-medium flex-inline"> <% @company.industries.each do |industry| %><%= industry.name %>. <% end %></p>
+    </div>              
+  <% end %>              
+</section>

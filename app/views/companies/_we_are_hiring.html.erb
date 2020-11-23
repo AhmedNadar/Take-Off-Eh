@@ -1,0 +1,88 @@
+<!-- company owner -->
+<% if @company.jobs.present? %>
+  <% if can? :manage, @company %> 
+    
+    <section class="grid w-full grid-cols-1 gap-4 p-4 mb-8 border-2 rounded-lg justify-items-auto" style="border-color: #efebe9;">
+      <div class="flex flex-wrap w-full">
+        <svg class="w-6 h-6 mr-2 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>    
+        <h2 class="text-lg font-semibold">Join our family</h2>
+      </div>
+      <hr class="hr-01">
+      <p class="w-full text-base font-medium flex-inline">You have published <span class="inline-block px-3 py-1 text-sm font-semibold text-blue-600 rounded-full bg-orange-bit"><%= pluralize(@company.jobs.count, ' job') %> </span></p>
+      <% @company.jobs.each do |job|%>
+        <ul class="py-2 text-gray-700 list-disc list-inside">
+          <li><%= link_to job.title, company_job_path(@company, job), class:"w-full text-base font-medium text-indigo-600 underline flex-inline hover:no-underline" %></li>
+        </ul>   
+      <% end %>
+      <span class="w-full my-2 text-center text-orange-800">Looking for talented individuals!?</span>
+      <%= link_to new_job_path, class:"text-indigo-500 hover:bg-orange-bit transition ease-in-out duration-700" do %>                    
+        <div class="grid p-4 border-2 border-indigo-300 border-dashed rounded-lg grid-row-2 place-items-center">
+          <svg class="w-6 h-6 my-2 text-center text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          <span class="w-full my-2 text-center">Add a new Job</span>
+        </div>
+      <% end %>     
+    </section>
+    
+  <% else %> 
+
+
+    <section class="grid w-full grid-cols-1 gap-4 p-4 mb-8 border-2 rounded-lg justify-items-auto" style="border-color: #efebe9;">
+      <div class="flex flex-wrap w-full">
+        <svg class="w-6 h-6 mr-2 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>    
+        <h2 class="text-lg font-semibold">Join our family</h2>
+      </div>
+      <hr class="hr-01">
+    
+      
+
+      <p class="w-full text-base font-medium flex-inline">We have <span class="inline-block px-3 py-1 text-sm font-semibold text-blue-600 rounded-full bg-orange-bit"><%= pluralize(@company.jobs.count, ' job') %> </span></p>
+      <% @company.jobs.each do |job|%>
+        <ul class="py-2 text-gray-700 list-disc list-inside">
+          <li><%= link_to job.title, company_job_path(@company, job), class:"w-full text-base font-medium text-indigo-600 underline flex-inline hover:no-underline" %></li>
+        </ul>   
+      <% end %>
+
+    </section>
+  <% end %>
+  
+<% end %>
+
+<%#= link_to 'Ad details', magazine_ad_path(@magazine, @ad) %>
+
+      
+
+
+<%
+=begin%>
+ 
+        <%= link_to new_job_path, class:"text-indigo-500 hover:bg-orange-bit transition ease-in-out duration-700" do %>                    
+          <div class="grid p-1 border-2 border-indigo-300 border-dashed rounded-lg grid-row-2 place-items-center">
+            <svg class="w-6 h-6 my-2 text-center text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            <span class="w-full my-1 text-center text-indiog-700">Add a new job</span>
+          </div>
+        <% end %>   
+<%
+=end%>
+
+    
+        <%
+=begin%>
+ <span class="w-full my-2 text-center">You haven't listed a job yet. It is time to join the big community and add more feature to your company profile.</span>
+        <%= link_to new_job_path, class:"text-indigo-500 hover:bg-orange-bit transition ease-in-out duration-700" do %>                    
+          <div class="grid p-4 border-2 border-indigo-300 border-dashed rounded-lg grid-row-2 place-items-center">
+            <svg class="w-6 h-6 my-2 text-center text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            <span class="w-full my-2 text-center">Create a Job</span>
+          </div>
+        <% end %> 
+<%
+=end%>

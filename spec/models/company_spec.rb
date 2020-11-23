@@ -8,9 +8,7 @@
 #  email          :string
 #  found_date     :string
 #  headquarter    :string
-#  industry       :string
 #  name           :string
-#  phone_number   :string
 #  slug           :string           indexed
 #  stage          :string
 #  suggested_url  :string
