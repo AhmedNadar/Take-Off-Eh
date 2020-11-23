@@ -40,7 +40,7 @@ class JobsController < ApplicationController
       source: token,
       email: current_user.email,
       name: current_user.name,
-      phone: @job.company.phone_number
+      # phone: @job.company.phone_number
     })
 
     # Create a charge

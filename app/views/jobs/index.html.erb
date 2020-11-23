@@ -1,34 +1,80 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Jobs</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>region</th>
-      <th>Job type</th>
-      <th>Remote</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @jobs.each do |job| %>
-      <tr>
-        <td><%= job.title %></td>
-        <td><%= job.region %></td>
-        <td><%= job.job_type %></td>
-        <td><%= job.remote %></td>
-
-        <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Job', new_job_path %>
+<div class="py-12 bg-white">
+  <div class="max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
+    <p id="notice"><%= notice %></p>
+    <h3 class="mt-2 mb-10 text-3xl font-extrabold leading-8 text-gray-800 sm:text-3xl sm:leading-10">
+      Today's remote jobs
+    </h3> 
+    <div class="flex flex-col">
+      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div class="overflow-hidden border-b border-gray-200 shadow">
+            <table class="min-w-full divide-y divide-gray-200 table-auto">
+              <tbody class="bg-white divide-y-8 divide-gray-100">
+                <% @jobs.each do |job| %>
+                  <tr class="transition duration-150 ease-in-out cursor-pointer hover:bg-indigo-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 hover:bg-gray-50" >                                    
+                    <td class="px-6 py-4 whitespace-no-wrap">
+                      <%= link_to job_path(job) do %>
+                        <div class="flex items-center">
+                          <div class="flex-shrink-0 w-10 h-10">
+                            <%= image_tag(job.company.logo_resize, class: "w-10 h-10") %>                      
+                          </div>
+                          <div class="ml-4">
+                            <div class="text-sm font-bold leading-5 text-gray-900 md:text-lg">
+                              <%= job.title %>
+                            </div>
+                            <div class="text-sm leading-5 text-gray-600">
+                              <%= job.company.name %>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+                    </td>
+                                        
+                    <td class="px-6 py-4 whitespace-no-wrap">
+                      <%= link_to job_path(job) do %>
+                        <div class="text-sm leading-5 text-gray-900"><%= job.job_type %></div>                        
+                      <% end %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-no-wrap">
+                      <%= link_to job_path(job) do %>
+                        <span class="inline-flex px-2 text-xs font-semibold leading-5 ">
+                          <% if job.region === "Remote" %>
+                            <span class="flex font-bold text-green-600 flex-inline ">
+                              <%= job.region %>
+                              <span class="flex items-center ml-1 leading-5 text-green-500 sm:mr-2">
+                                <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                                </svg>                  
+                              </span>                                      
+                            </span>
+                          <% else %>      
+                            <span><%= job.region %> </span>                
+                          <% end %> 
+                        </span>
+                      <% end %>  
+                    </td>
+                    <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
+                      <small class="flex justify-start mb-1 text-xs text-gray-500"><%= time_ago_in_words(job.created_at) %></small>
+                    </td>
+                    <% if can? :manage, job %>
+                      <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap">
+                        <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                          <% if can? :manage, job %>
+                            <%= link_to 'Edit', edit_job_path(job), class: "btn btn-sm btn-outlined btn-default" %>
+                          <% end %>
+                          <% if can? :manage, @company %>      
+                            <%= link_to 'Delete', job_path(job), method: :delete, class: "btn btn-sm btn-outlined btn-default", data: { confirm: "Are you sure?" } %>
+                          <% end %>                      
+                        </a>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
