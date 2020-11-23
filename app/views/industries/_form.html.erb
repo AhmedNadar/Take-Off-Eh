@@ -1,0 +1,24 @@
+<div class="mx-auto">
+  <%= form_with(model: industry, local: true) do |form| %>
+    <% if industry.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(industry.errors.count, "error") %> prohibited this industry from being saved:</h2>
+
+        <ul>
+          <% industry.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+    <div class="mb-6">
+      <%= form.label :name, "Industry Name" , class: "label"  %>
+      <%= form.text_field :name, class: "input", required: 'required', placeholder: "Type new industry name?" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-green"%>
+    </div>
+  <% end %>
