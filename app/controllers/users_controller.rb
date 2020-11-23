@@ -12,11 +12,14 @@ class UsersController < ApplicationController
     @user = User.friendly.find(params[:id])
     @companies = @user.companies
     # @blogs     = @user.blogs
-
-    unless current_user.admin?
-      unless @user == current_user
-        redirect_to root_path, :alert => "Access denied."
+    if signed_in?
+      unless current_user.admin?
+        unless @user == current_user
+          redirect_to root_path, :alert => "Access denied."
+        end
       end
+    else
+      redirect_to root_path, :alert => "Access denied."
     end
 
   end
