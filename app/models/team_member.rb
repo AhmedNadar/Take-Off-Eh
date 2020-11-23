@@ -6,6 +6,7 @@
 #  email        :string
 #  first_name   :string
 #  last_name    :string
+#  note         :string
 #  profile_link :string
 #  title        :string
 #  created_at   :datetime         not null
@@ -31,4 +32,9 @@ class TeamMember < ApplicationRecord
   validates :profile_link, presence: true
   validates :email, presence: true
   validates :member_photo, presence: true
+  validates :note, presence: true
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
