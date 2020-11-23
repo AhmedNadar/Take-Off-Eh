@@ -5,15 +5,15 @@
       Experince the startup ecosystem - invest in startups, research the fastest growing blogs, and find a job you love.
     </p>
     
-    <div class="grid sm:gap-4 sm:mx-2 grid-cols-24 sm:gap-y-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4">
+    <div class="grid sm:gap-4 sm:mx-2 grid-cols-24 sm:gap-y-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-y-4">
       <% @blogs.each do |blog| %>
       <%= link_to blog_path(blog), class:"col-start-2 col-span-22 sm:col-span-1", alt:" View #{blog.title}", title:"View #{blog.title}" do %>
         <div class="flex items-start max-h-full">
-          <div class="relative flex-row w-full duration-500 ease-in-out transform border border-gray-300 rounded-lg hover:shadow-md min-h-card">
-            <%= image_tag blog.image.variant(resize: "300x200^", crop: '300x200+0+0'), class:"h-56 w-full mb-4 rounded-t-lg", alt:"#{blog.title} logo" if blog.image.present? %>
+          <div class="relative flex-row w-full duration-500 ease-in-out transform border border-gray-300 rounded-lg hover:shadow-md min-h-blog">
+            <%= image_tag blog.image.variant(:gravity=>"Center", resize: "400x300^", crop: '400x300+0+0'), class:" w-full rounded-t-lg", alt:"#{blog.title} logo" if blog.image.present? %>
           
             <div class="p-4">            
-              <h3 class="text-base font-normal md:text-lg lg:text-xl"><%= truncate(strip_tags(blog.title.to_s), length: 140) %></h3>        
+              <h3 class="text-base font-medium"><%= truncate(strip_tags(blog.title.capitalize.to_s), length: 60) %></h3>
             </div> 
           </div>            
         </div>

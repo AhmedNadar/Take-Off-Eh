@@ -1,28 +1,36 @@
 <div class="flex flex-wrap items-center justify-center mx-auto">
   <div class="w-full">
-        <section class="px-4 pt-8">
-              <%= image_tag @blog.image.variant(resize: '100%x100%').processed, class: "mx-auto", alt: @blog.title if @blog.image.attached?  %>
-        </section>
-    <div class="container relative p-6 mx-auto text-gray-900 bg-white rounded-lg lg:p-10" id=<%= blog_path(@blog.id) %>>
-      <div class="flex flex-wrap items-center justify-between w-full pb-4 mb-8">
-        <div class="flex-1">
-          <h1 class="text-3xl font-bold leading-none text-gray-800"><%= @blog.title %></h1>
-          <p class="text-sm font-semibold text-gray-500 uppercase">Category: <%= @blog.category %></p> 
-          <p class="text-sm italic text-gray-500">Created by <%= @blog.user.name ||= @blog.user.username %></p>           
-        </div>
-
-        <div id="photos" class="flex flex-wrap items-start justify-between w-full mb-6">      
-          <div class="w-full mt-6 lg:pr-10 lg:mt-0">
-            <div class="mb-6">
-              <%= @blog.content %>
-            </div>
-          </div>
-        </div>
-        
+    <article class="container relative p-4 mx-auto text-gray-900" id=<%=@blog.id %>>
+    
+    <div class="mt-6 text-base leading-6">
+      <%= link_to '← Hit news home', blogs_path, class:"px-2 py-2 font-semibold text-blue-500 transition duration-150 ease-in-out hover:text-blue-700 hover:bg-orange-200 rounded bg-orange-100"%>
+    </div>  
+    
+      <div class="my-10">
+        <%= image_tag @blog.image.variant(:gravity=>"Center", resize: "1440x600^", crop: '1440x600+0+0'), class: "mx-auto", alt: @blog.title if @blog.image.attached? %>
       </div>
-    </div>
+      
+      <h1 class="mb-8 text-base text-lg font-semibold text-center lg:text-5xl md:text-3xl font-heading"><%= @blog.title %></h1>
+      
+      <p class="mb-10 text-center">
+        <span><%= @blog.created_at.strftime("%B %d") %></span>, by 
+        <%= link_to @blog.user.name ||= @blog.user.username, @blog.user, class: "text-indigo-600" %>
+      </p>
+
+      <hr class="hr">
+      
+      <div class="max-w-6xl mx-auto">
+        <%= @blog.content %>
+      </div>
+    
+      <div class="mt-4 mr-4 ">
+        <% if can? :manage, @blog %>
+          <%= link_to 'Edit', edit_blog_path(@blog), class: "btn btn-sm btn-outlined btn-default" %>
+        <% end %>
+        <% if can? :manage, @blog %>      
+          <%= link_to 'Delete', blog_path(@blog), method: :delete, class: "btn btn-sm btn-outlined btn-default", data: { confirm: "Are you sure?" } %>
+        <% end %>
+      </div>
+    </article>
   </div>
 </div>
-
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>

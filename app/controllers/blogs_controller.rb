@@ -5,7 +5,7 @@ class BlogsController < ApplicationController
   respond_to :html
 
   def index
-    @blogs = Blog.all
+    @blogs = Blog.all.with_rich_text_content
     respond_with(@blogs)
   end
 

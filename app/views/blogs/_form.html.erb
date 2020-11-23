@@ -15,8 +15,8 @@
 
   <div class="mb-6">
     <%= form.label :image, "Blog header image" , class: "label" %>
-    <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="10">
-    <%= form.file_field :image, multiple: false, direct_upload: true, class: 'form-input py-10', accept: 'image/png, image/jpeg, image/gif, image/tiff', size_limit: 5_000_000, data: { target: 'dropzone.input' } %>
+    <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1">
+    <%= form.file_field :image, multiple: false, direct_upload: true, class: 'form-input py-10', accept: 'image/png, image/jpeg, image/gif, image/tiff', size_limit: 2_000_000, data: { target: 'dropzone.input' } %>
     <div class="text-gray-600 dropzone-msg dz-message needsclick">
       <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>
       <span class="text-sm dropzone-msg-desc">2 MB file size maximum. Allowed file types png, jpg.</span>

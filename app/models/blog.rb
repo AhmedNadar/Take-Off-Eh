@@ -23,7 +23,7 @@ class Blog < ApplicationRecord
   has_rich_text :content
   has_one_attached :image, dependent: :destroy
 
-  validates :title, presence: true, length: {maximum: 50}
+  validates :title, presence: true, length: {maximum: 250}
   validates :content, presence: true
   validates :category, presence: true
   validate :image_format
